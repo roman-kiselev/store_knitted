@@ -1,0 +1,36 @@
+.containerImage {
+    background-image: url("../img/top.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+    width: 100%;
+    height: 6vh;
+    max-height: 50px;
+    display: flex;
+    justify-content: end;
+    align-items: center;
+}
+
+@media (max-width: 768px) {
+    .containerImage {
+        height: 3vh;
+    }
+}
+
+.containerTools {
+    display: flex;
+    justify-content: end;
+    margin-right: 10vw;
+    width: 28.8vw;
+}
+
+.select {
+    background-color: #ffde3f;
+    cursor: pointer;
+    border: none;
+}
+
+.language {
+}
+
+.currency {
+}

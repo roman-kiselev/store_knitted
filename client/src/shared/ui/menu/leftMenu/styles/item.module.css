@@ -1,0 +1,48 @@
+.itemContainer {
+    display: flex;
+    flex-direction: column;
+    border-bottom: white 1px solid;
+    color: white;
+    font-family: "Bellota", cursive;
+    font-weight: 700;
+    font-size: 20px;
+    box-sizing: border-box;
+}
+
+.item {
+    display: flex;
+    box-sizing: border-box;
+    padding: 5px 0 5px 2px;
+    cursor: pointer;
+    box-shadow: 0 0 0 0;
+    transition: box-shadow 0.3s ease-in-out;
+}
+
+/* Первый пункт меню*/
+/* .item:first-child {
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+} */
+.itemChildContainer {
+    display: none;
+    flex-direction: column;
+    box-sizing: border-box;
+}
+
+.item:hover {
+    background-color: #ffde3f;
+    color: black;
+}
+
+.itemChild {
+    display: flex;
+    background-color: #97eaa0;
+    width: 100%;
+    padding: 5px 0 5px 10%;
+    padding-left: 15%;
+    box-sizing: border-box;
+}
+
+.active {
+    display: flex;
+}

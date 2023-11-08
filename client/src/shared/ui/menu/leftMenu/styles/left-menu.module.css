@@ -1,0 +1,21 @@
+@import url("https://fonts.googleapis.com/css2?family=Balsamiq+Sans:wght@400;700&family=Bellota:wght@300;400;700&family=Comfortaa:wght@300;400;500;600&family=Shantell+Sans:ital,wght@0,300;0,400;0,500;0,700;1,400&display=swap");
+
+.container {
+    display: flex;
+    background-color: #53c163;
+    border: 1px solid #ffde3f;
+    border-radius: 20px;
+    flex-direction: column;
+    margin: 20px 10%;
+    width: 100%;
+    box-sizing: border-box;
+    overflow: auto;
+}
+
+.leftMenuContainer {
+    display: flex;
+    flex-direction: column;
+    height: 70vh;
+    width: 100%;
+    box-sizing: border-box;
+}

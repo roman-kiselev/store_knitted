@@ -1,0 +1,17 @@
+.inputContainer {
+    display: flex;
+    max-width: 300px;
+    width: 100%;
+}
+
+.input {
+    display: flex;
+    width: 70%;
+    border: 1px solid #ffde3f;
+    border-radius: 7px;
+}
+
+.label {
+    display: flex;
+    width: 30%;
+}

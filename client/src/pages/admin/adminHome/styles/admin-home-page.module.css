@@ -1,0 +1,13 @@
+.container {
+    display: flex;
+}
+
+.leftMenuContainer {
+    display: flex;
+    flex-basis: 15%;
+}
+
+.contentContainer {
+    display: flex;
+    flex-basis: 80%;
+}

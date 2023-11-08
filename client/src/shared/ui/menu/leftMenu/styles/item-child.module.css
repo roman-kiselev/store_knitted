@@ -1,0 +1,12 @@
+.itemChild {
+    display: flex;
+    background-color: #97eaa0;
+    width: 100%;
+    padding: 5px 0 5px 10%;
+    padding-left: 15%;
+    box-sizing: border-box;
+}
+
+.itemChild:hover {
+    background-color: #c3e5c7;
+}
