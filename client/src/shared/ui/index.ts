@@ -1,21 +1,37 @@
 import { Button } from "./button";
-import { Input, InputNumber } from "./input";
-import { Header, HeaderConteinerBottom, HeaderTop, Layout } from "./layout";
+import { OneImage } from "./imageUi";
+import { Input, InputFile, InputNumber } from "./input";
+import {
+    Col,
+    Container,
+    Header,
+    HeaderConteinerBottom,
+    HeaderTop,
+    Layout,
+    Row,
+} from "./layout";
 import { LinkNav } from "./link";
 import { Item, ItemChild, LeftMenu } from "./menu";
+import { Select } from "./select";
 import { Spin } from "./spin";
 
 export {
     Button,
+    Col,
+    Container,
     Header,
     HeaderConteinerBottom,
     HeaderTop,
     Input,
+    InputFile,
     InputNumber,
     Item,
     ItemChild,
     Layout,
     LeftMenu,
     LinkNav,
+    OneImage,
+    Row,
+    Select,
     Spin,
 };

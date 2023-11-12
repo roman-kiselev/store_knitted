@@ -6,9 +6,11 @@
 
 .input {
     display: flex;
-    width: 70%;
+    width: 100%;
     border: 1px solid #ffde3f;
     border-radius: 7px;
+    padding: 5px 10px;
+    font-size: 14px;
 }
 
 .label {

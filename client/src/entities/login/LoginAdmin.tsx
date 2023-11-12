@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { useLocation, useNavigate } from "react-router";
 import { authApi } from "../../shared/api";
 import { useAppSelector, useInputString } from "../../shared/hooks";
@@ -20,9 +21,12 @@ const LoginAdmin = () => {
     const handleLogin = () => {
         login({ email, password });
     };
-    if (isAuth) {
-        navigate(location.state?.from || "/admin", { replace: true });
-    }
+    useEffect(() => {
+        if (isAuth) {
+            navigate(location.state?.from || "/admin", { replace: true });
+        }
+    }, [isAuth, location.state, navigate]);
+
     if (isLoadingCheck || isLoading || isLoadingStore) {
         return <Spin />;
     }

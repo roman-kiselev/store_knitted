@@ -11,6 +11,7 @@ interface InputProps {
     containerPosition?: "column" | "row";
     style?: React.CSSProperties;
     styleLabel?: React.CSSProperties;
+    resetMaxWidth?: boolean;
 }
 
 const Input: React.FC<InputProps> = ({
@@ -23,11 +24,16 @@ const Input: React.FC<InputProps> = ({
     value,
     style,
     styleLabel,
+    resetMaxWidth,
 }) => {
     return (
         <div
             className={styles.inputContainer}
-            style={{ flexDirection: containerPosition, ...style }}
+            style={{
+                maxWidth: resetMaxWidth ? "100%" : undefined,
+                flexDirection: containerPosition,
+                ...style,
+            }}
         >
             {label && (
                 <label style={styleLabel} className={styles.label}>
@@ -40,6 +46,7 @@ const Input: React.FC<InputProps> = ({
                 className={styles.input}
                 value={value}
                 onChange={onChange}
+                style={resetMaxWidth ? { maxWidth: "100%" } : {}}
             />
         </div>
     );
