@@ -1,7 +1,9 @@
 import {
     CreateHandler,
     IAuthSlice,
+    ICreatePattern,
     ICurrencySlice,
+    IFormsSlice,
     ILanguageSlice,
     IToken,
     IUserLogin,
@@ -10,7 +12,9 @@ import {
 export type {
     CreateHandler,
     IAuthSlice,
+    ICreatePattern,
     ICurrencySlice,
+    IFormsSlice,
     ILanguageSlice,
     IToken,
     IUserLogin,

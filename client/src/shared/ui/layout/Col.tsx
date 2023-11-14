@@ -37,6 +37,7 @@ interface ICol {
     mr?: number;
     centerHorizontal?: boolean;
     centerVertical?: boolean;
+    className?: string[] | string;
 }
 const Col: React.FC<ICol> = ({
     children,
@@ -49,6 +50,7 @@ const Col: React.FC<ICol> = ({
     mt,
     centerHorizontal,
     centerVertical,
+    className,
 }) => {
     const hasRow =
         Array.isArray(children) &&
@@ -71,7 +73,7 @@ const Col: React.FC<ICol> = ({
                 justifyContent: centerVertical ? "center" : "flex-start",
                 alignItems: centerHorizontal ? "center" : "flex-start",
             }}
-            className={styles.containerCol}
+            className={[styles.containerCol, className].join(" ")}
         >
             {children}
         </div>

@@ -36,6 +36,13 @@ interface IRow {
     mr?: number;
     centerHorizontal?: boolean;
     centerVertical?: boolean;
+    className?: string[] | string;
+    onDragStart?: (e: React.DragEvent<HTMLDivElement>) => void;
+    onDragEnd?: (e: React.DragEvent<HTMLDivElement>) => void;
+    onDragEnter?: (e: React.DragEvent<HTMLDivElement>) => void;
+    onDragLeave?: (e: React.DragEvent<HTMLDivElement>) => void;
+    onDrop?: (e: React.DragEvent<HTMLDivElement>) => void;
+    onDragOver?: (e: React.DragEvent<HTMLDivElement>) => void;
 }
 
 const Row: React.FC<IRow> = ({
@@ -49,6 +56,13 @@ const Row: React.FC<IRow> = ({
     contentWidth = "100%",
     centerHorizontal,
     centerVertical,
+    className,
+    onDragStart,
+    onDragEnd,
+    onDragEnter,
+    onDragLeave,
+    onDrop,
+    onDragOver,
 }) => {
     const hasRow =
         Array.isArray(children) &&
@@ -71,7 +85,13 @@ const Row: React.FC<IRow> = ({
                 justifyContent: centerVertical ? "center" : "flex-start",
                 alignItems: centerHorizontal ? "center" : "flex-start",
             }}
-            className={styles.containerRow}
+            className={[styles.containerRow, className].join(" ")}
+            onDragStart={onDragStart}
+            onDragEnd={onDragEnd}
+            onDragEnter={onDragEnter}
+            onDragLeave={onDragLeave}
+            onDrop={onDrop}
+            onDragOver={onDragOver}
         >
             {children}
         </div>

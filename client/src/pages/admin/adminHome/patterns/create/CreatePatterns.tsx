@@ -1,6 +1,5 @@
 import { useState } from "react";
-import { BsFillPlusCircleFill } from "react-icons/bs";
-import { AddOneImg } from "../../../../../entities";
+import { AddOneImg, FormCreatePattern } from "../../../../../entities";
 import { useInputString } from "../../../../../shared/hooks";
 import { Col, Container, Input, Row } from "../../../../../shared/ui";
 
@@ -93,7 +92,8 @@ const CreatePatterns = () => {
                     <AddOneImg />
                 </Col>
                 <Col m={5} contentWidth="60%">
-                    <Row contentHeight="max-content">
+                    <FormCreatePattern />
+                    {/* <Row contentHeight="max-content">
                         <h3>Форма добавления мастер класса</h3>
                     </Row>
                     <Row contentHeight="max-content">
@@ -112,6 +112,7 @@ const CreatePatterns = () => {
                         mb={10}
                         contentHeight="max-content"
                         centerHorizontal
+                        centerVertical
                     >
                         <BsFillPlusCircleFill
                             size={30}
@@ -128,7 +129,7 @@ const CreatePatterns = () => {
                                 valueEng={item.valueEng}
                             />
                         );
-                    })}
+                    })} */}
                 </Col>
             </Row>
         </Container>

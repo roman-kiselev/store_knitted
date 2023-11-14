@@ -1,28 +1,42 @@
 import Col from "./Col";
 import Row from "./Row";
 import styles from "./style/container.module.css";
+
+type contentString =
+    | "max-content"
+    | "min-content"
+    | "100%"
+    | "95%"
+    | "90%"
+    | "85%"
+    | "80%"
+    | "75%"
+    | "70%"
+    | "65%"
+    | "60%"
+    | "55%"
+    | "50%"
+    | "45%"
+    | "40%"
+    | "35%"
+    | "30%"
+    | "25%"
+    | "20%"
+    | "15%"
+    | "10%"
+    | "5%";
 interface IContainerProps {
     children: React.ReactNode;
-    contentHeight?:
-        | "max-content"
-        | "min-content"
-        | "100%"
-        | "75%"
-        | "50%"
-        | "25%";
-    contentWidth?:
-        | "max-content"
-        | "min-content"
-        | "100%"
-        | "75%"
-        | "50%"
-        | "25%";
+    contentHeight?: contentString;
+    contentWidth?: contentString;
+    className?: string[] | string;
 }
 
 const Container: React.FC<IContainerProps> = ({
     children,
     contentHeight = "auto",
     contentWidth,
+    className,
 }) => {
     const hasRow =
         Array.isArray(children) &&
@@ -39,7 +53,7 @@ const Container: React.FC<IContainerProps> = ({
                 height: contentHeight,
                 width: contentWidth,
             }}
-            className={styles.container}
+            className={[styles.container, className].join(" ")}
         >
             {children}
         </div>

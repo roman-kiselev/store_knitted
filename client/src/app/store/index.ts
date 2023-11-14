@@ -7,6 +7,7 @@ import { adminMainApi, authApi, mainApi } from "../../shared/api";
 import {
     authReducer,
     currencyReducer,
+    formReducer,
     languageReducer,
     navReducer,
 } from "../../shared/models";
@@ -16,6 +17,7 @@ const rootReducer = combineReducers({
     currency: currencyReducer,
     nav: navReducer,
     auth: authReducer,
+    form: formReducer,
     [mainApi.reducerPath]: mainApi.reducer,
     [adminMainApi.reducerPath]: adminMainApi.reducer,
 });
