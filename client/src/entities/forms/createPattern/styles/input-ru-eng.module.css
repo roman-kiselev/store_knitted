@@ -8,7 +8,7 @@
 .indexContainer {
     background-color: rgb(255, 255, 154);
     border-radius: 20px;
-    height: 90%;
+    height: 70px;
     cursor: grab;
     user-select: none;
 }

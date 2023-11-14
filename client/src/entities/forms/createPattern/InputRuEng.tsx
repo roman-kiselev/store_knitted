@@ -28,6 +28,7 @@ const InputRuEng: React.FC<InputRuEngProps> = ({
             onDragOver={handleDragOver}
             onDrop={handleDrop}
             className={styles.container}
+            m={5}
         >
             <Col
                 className={styles.indexContainer}
@@ -41,14 +42,20 @@ const InputRuEng: React.FC<InputRuEngProps> = ({
             <Col centerHorizontal centerVertical contentWidth="80%">
                 <Row m={5}>
                     <Input
-                        styleLabel={{ width: "max-content", marginRight: 10 }}
+                        styleLabel={{
+                            width: "max-content",
+                            marginRight: 10,
+                        }}
                         resetMaxWidth
                         label="RU"
                     />
                 </Row>
                 <Row m={5}>
                     <Input
-                        styleLabel={{ width: "max-content", marginRight: 10 }}
+                        styleLabel={{
+                            width: "max-content",
+                            marginRight: 10,
+                        }}
                         resetMaxWidth
                         label="ENG"
                     />

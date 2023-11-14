@@ -37,10 +37,10 @@ const FormCreatePattern = () => {
 
     return (
         <Container>
-            <Row>
+            <Row contentHeight="min-content" m={5}>
                 <h3>Форма добавления мастер класса</h3>
             </Row>
-            <Row>
+            <Row contentHeight="min-content" m={5}>
                 <Input
                     containerPosition="column"
                     label="Наименование мастер класса RU"
@@ -50,7 +50,7 @@ const FormCreatePattern = () => {
                     onChange={setNameStateRu}
                 />
             </Row>
-            <Row>
+            <Row contentHeight="min-content" m={5}>
                 <Input
                     containerPosition="column"
                     label="Наименование мастер класса ENG"
@@ -60,15 +60,22 @@ const FormCreatePattern = () => {
                     onChange={setNameStateEng}
                 />
             </Row>
-            <Row>
-                {testArr.map((item) => (
-                    <InputRuEng
-                        index={item.index}
-                        handleDragStart={handleDragStart}
-                    />
-                ))}
+            <Row contentHeight="min-content" m={5}>
+                <Container>
+                    {testArr.map((item) => (
+                        <InputRuEng
+                            index={item.index}
+                            handleDragStart={handleDragStart}
+                        />
+                    ))}
+                </Container>
             </Row>
-            <Row>
+            <Row
+                contentHeight="min-content"
+                centerHorizontal
+                centerVertical
+                m={5}
+            >
                 <Button title="Добавить" onClick={() => {}} />
             </Row>
         </Container>
