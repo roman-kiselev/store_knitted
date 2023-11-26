@@ -2,8 +2,8 @@ import { Module } from '@nestjs/common';
 import { SequelizeModule } from '@nestjs/sequelize';
 import { AuthModule } from 'src/auth/auth.module';
 import { FilesMasterClass } from 'src/files-master-class/files-master-class.model';
-import { ImagesMasterClass } from 'src/images-master-class/images-master.model';
-import { ParameterToys } from 'src/parametr-toys/parametr-toys.model';
+import { FilesModule } from 'src/files/files.module';
+import { PatternParams } from 'src/pattern-params/pattern-params.model';
 import { MasterClassController } from './master-class.controller';
 import { MasterClass } from './master-class.model';
 import { MasterClassService } from './master-class.service';
@@ -12,13 +12,9 @@ import { MasterClassService } from './master-class.service';
   controllers: [MasterClassController],
   providers: [MasterClassService],
   imports: [
-    SequelizeModule.forFeature([
-      ImagesMasterClass,
-      FilesMasterClass,
-      MasterClass,
-      ParameterToys,
-    ]),
+    SequelizeModule.forFeature([FilesMasterClass, MasterClass, PatternParams]),
     AuthModule,
+    FilesModule,
   ],
 })
 export class MasterClassModule {}

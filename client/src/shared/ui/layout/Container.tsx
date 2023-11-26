@@ -45,7 +45,6 @@ const Container: React.FC<IContainerProps> = ({
         );
 
     const flexDirection = hasRow ? "row" : "column";
-    console.log(hasRow);
     return (
         <div
             style={{

@@ -1,4 +1,4 @@
-import { useInputString } from "./input";
+import { useInputFile, useInputString } from "./input";
 import { useAppDispatch, useAppSelector } from "./store";
 
-export { useAppDispatch, useAppSelector, useInputString };
+export { useAppDispatch, useAppSelector, useInputFile, useInputString };

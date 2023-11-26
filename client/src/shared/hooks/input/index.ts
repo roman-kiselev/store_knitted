@@ -1,3 +1,4 @@
+import useInputFile from "./useInputFile";
 import useInputString from "./useInputString";
 
-export { useInputString };
+export { useInputFile, useInputString };

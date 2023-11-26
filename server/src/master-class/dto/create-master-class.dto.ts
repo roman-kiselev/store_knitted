@@ -1,4 +1,8 @@
 export class CreateMasterClassDto {
-  readonly name: string;
-  readonly description: string;
+  readonly nameRu: string;
+  readonly nameEng: string;
+  readonly priceRu: number;
+  readonly priceEng: number;
+  // readonly params: IParamsPatterns[];
+  readonly params: string;
 }

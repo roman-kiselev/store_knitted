@@ -7,18 +7,14 @@ import {
 } from 'sequelize-typescript';
 import { MasterClass } from 'src/master-class/master-class.model';
 
-interface ImagesMasterClassAttr {
-  mainImgName: string;
-  fileNameRu: string;
-  fileNameEng: string;
+interface PatternParamsAttr {
+  valueRu: string;
+  valueEng: string;
   masterClassId: number;
 }
 
-@Table({ tableName: 'images-master-class' })
-export class ImagesMasterClass extends Model<
-  ImagesMasterClass,
-  ImagesMasterClassAttr
-> {
+@Table({ tableName: 'pattern-params' })
+export class PatternParams extends Model<PatternParams, PatternParamsAttr> {
   @Column({
     type: DataType.INTEGER,
     unique: true,
@@ -31,20 +27,17 @@ export class ImagesMasterClass extends Model<
     type: DataType.STRING,
     unique: true,
   })
-  mainImgName: string;
+  valueRu: string;
 
   @Column({
     type: DataType.STRING,
     unique: true,
   })
-  fileNameRu: string;
-
-  @Column({
-    type: DataType.STRING,
-    unique: true,
-  })
-  fileNameEng: string;
+  valueEng: string;
 
   @ForeignKey(() => MasterClass)
+  @Column({
+    type: DataType.INTEGER,
+  })
   masterClassId: number;
 }

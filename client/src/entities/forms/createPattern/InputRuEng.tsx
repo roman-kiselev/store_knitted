@@ -1,6 +1,8 @@
+import { TiDelete } from "react-icons/ti";
+import { useAppDispatch, useAppSelector } from "../../../shared/hooks";
+import { delRowParams, editParams } from "../../../shared/models";
 import { Col, Input, Row } from "../../../shared/ui";
 import styles from "./styles/input-ru-eng.module.css";
-
 interface InputRuEngProps {
     handleDragStart?: (event: React.DragEvent<HTMLDivElement>) => void;
     handleDragEnd?: (event: React.DragEvent<HTMLDivElement>) => void;
@@ -20,6 +22,12 @@ const InputRuEng: React.FC<InputRuEngProps> = ({
     handleDragOver,
     index,
 }) => {
+    const dispatch = useAppDispatch();
+    const { createPattern } = useAppSelector((store) => store.form);
+    const findedData = createPattern?.params?.find(
+        (item) => item.index === index
+    );
+
     return (
         <Row
             onDragStart={handleDragStart}
@@ -40,26 +48,63 @@ const InputRuEng: React.FC<InputRuEngProps> = ({
                 {index}
             </Col>
             <Col centerHorizontal centerVertical contentWidth="80%">
-                <Row m={5}>
-                    <Input
-                        styleLabel={{
-                            width: "max-content",
-                            marginRight: 10,
-                        }}
-                        resetMaxWidth
-                        label="RU"
-                    />
-                </Row>
-                <Row m={5}>
-                    <Input
-                        styleLabel={{
-                            width: "max-content",
-                            marginRight: 10,
-                        }}
-                        resetMaxWidth
-                        label="ENG"
-                    />
-                </Row>
+                {createPattern.params.length > 0 && (
+                    <>
+                        <Row m={5}>
+                            <Input
+                                styleLabel={{
+                                    width: "max-content",
+                                    marginRight: 10,
+                                }}
+                                value={findedData?.nameRu}
+                                resetMaxWidth
+                                label="RU"
+                                onChange={(e) =>
+                                    dispatch(
+                                        editParams({
+                                            index,
+                                            nameRu: e.target.value,
+                                            nameEng: findedData?.nameEng || "",
+                                        })
+                                    )
+                                }
+                            />
+                        </Row>
+                        <Row m={5}>
+                            <Input
+                                styleLabel={{
+                                    width: "max-content",
+                                    marginRight: 10,
+                                }}
+                                resetMaxWidth
+                                label="ENG"
+                                value={findedData?.nameEng}
+                                onChange={(e) =>
+                                    dispatch(
+                                        editParams({
+                                            index,
+                                            nameEng: e.target.value,
+                                            nameRu: findedData?.nameRu || "",
+                                        })
+                                    )
+                                }
+                            />
+                        </Row>
+                    </>
+                )}
+            </Col>
+            <Col
+                m={5}
+                centerHorizontal
+                centerVertical
+                contentWidth="5%"
+                className={styles.containerDel}
+            >
+                <TiDelete
+                    size={30}
+                    color="red"
+                    onClick={() => dispatch(delRowParams(index))}
+                />
             </Col>
         </Row>
     );

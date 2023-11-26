@@ -40,9 +40,9 @@ export class ImagesMasterClassController {
     @UploadedFile() file: Express.Multer.File,
     @Query('id') id: number,
   ) {
-    return this.imagesMasterClassService.createImage({
-      file,
-      masterClassId: id,
-    });
+    // return this.imagesMasterClassService.createImage({
+    //   file,
+    //   masterClassId: id,
+    // });
   }
 }

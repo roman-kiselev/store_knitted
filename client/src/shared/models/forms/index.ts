@@ -1,3 +1,23 @@
-import { formReducer, formSlice } from "./formsSlice";
+import {
+    delRowParams,
+    editNameEng,
+    editNameRu,
+    editParams,
+    editPriceEng,
+    editPriceRu,
+    formReducer,
+    formSlice,
+    pushParams,
+} from "./formsSlice";
 
-export { formReducer, formSlice };
+export {
+    delRowParams,
+    editNameEng,
+    editNameRu,
+    editParams,
+    editPriceEng,
+    editPriceRu,
+    formReducer,
+    formSlice,
+    pushParams,
+};

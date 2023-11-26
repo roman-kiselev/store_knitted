@@ -1,7 +1,7 @@
 import { useState } from "react";
-import { AddOneImg, FormCreatePattern } from "../../../../../entities";
+import { CreatePattern } from "../../../../../features";
 import { useInputString } from "../../../../../shared/hooks";
-import { Col, Container, Input, Row } from "../../../../../shared/ui";
+import { Col, Input, Row } from "../../../../../shared/ui";
 
 interface IRowInput {
     index: number;
@@ -58,24 +58,6 @@ const CreatePatterns = () => {
         Blob | MediaSource | null
     >(null);
 
-    const [inputState, setINputState] = useState<IRowInput[]>([
-        {
-            index: 1,
-            valueRu: "",
-            valueEng: "",
-        },
-        {
-            index: 2,
-            valueRu: "",
-            valueEng: "",
-        },
-        {
-            index: 3,
-            valueRu: "",
-            valueEng: "",
-        },
-    ]);
-
     const handleImageChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         const file = event.target.files && event.target.files[0];
         if (file) {
@@ -85,55 +67,7 @@ const CreatePatterns = () => {
 
     const [value, setValue] = useInputString("");
 
-    return (
-        <Container>
-            <Row>
-                <Col m={5} contentWidth="30%">
-                    <AddOneImg />
-                </Col>
-                <Col m={5} contentWidth="60%">
-                    <FormCreatePattern />
-                    {/* <Row contentHeight="max-content">
-                        <h3>Форма добавления мастер класса</h3>
-                    </Row>
-                    <Row contentHeight="max-content">
-                        <Input
-                            styleLabel={{ width: "100%" }}
-                            label="Наименование мастер класса"
-                            containerPosition="column"
-                            style={{ width: "80%" }}
-                            resetMaxWidth
-                            value={value}
-                            onChange={setValue}
-                        />
-                    </Row>
-                    <Row
-                        mt={10}
-                        mb={10}
-                        contentHeight="max-content"
-                        centerHorizontal
-                        centerVertical
-                    >
-                        <BsFillPlusCircleFill
-                            size={30}
-                            cursor={"pointer"}
-                            color="green"
-                        />
-                    </Row>
-                    {inputState.map((item, index) => {
-                        return (
-                            <RowInput
-                                key={index}
-                                index={item.index}
-                                valueRu={item.valueRu}
-                                valueEng={item.valueEng}
-                            />
-                        );
-                    })} */}
-                </Col>
-            </Row>
-        </Container>
-    );
+    return <CreatePattern />;
 };
 
 export default CreatePatterns;

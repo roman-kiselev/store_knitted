@@ -1,22 +1,20 @@
 import { ModelAttributeColumnOptions } from 'sequelize';
 import {
-  BelongsToMany,
   Column,
   DataType,
   HasMany,
+  HasOne,
   Model,
   Table,
 } from 'sequelize-typescript';
 import { FilesMasterClass } from 'src/files-master-class/files-master-class.model';
-import { ImagesMasterClass } from 'src/images-master-class/images-master.model';
-import { ParameterToys } from 'src/parametr-toys/parametr-toys.model';
-import { McParameterToys } from './mc-parameter-toys.model';
+import { PatternParams } from 'src/pattern-params/pattern-params.model';
 
 interface MasterClassAttr {
-  name: string;
-  description?: string;
-  imgMain?: number;
-  price: number;
+  nameRu: string;
+  nameEng: string;
+  priceRu: number;
+  priceEng: number;
 }
 
 @Table({ tableName: 'master-class', paranoid: true })
@@ -27,34 +25,33 @@ export class MasterClass extends Model<MasterClass, MasterClassAttr> {
     autoIncrement: true,
     primaryKey: true,
   } as ModelAttributeColumnOptions)
-  id: true;
+  id: number;
 
   @Column({
     type: DataType.STRING,
     unique: true,
   })
-  name: string;
+  nameRu: string;
 
   @Column({
     type: DataType.STRING,
     unique: true,
-    allowNull: true,
-  } as ModelAttributeColumnOptions)
-  description: string;
+  })
+  nameEng: string;
 
   @Column({
     type: DataType.INTEGER,
-    unique: true,
-    allowNull: true,
   })
-  imgMain?: number;
+  priceRu: number;
 
-  @HasMany(() => ImagesMasterClass)
-  imagesMasterClass: ImagesMasterClass[];
+  @Column({
+    type: DataType.INTEGER,
+  })
+  priceEng: number;
 
-  @HasMany(() => FilesMasterClass)
-  filesMasterClass: FilesMasterClass[];
+  @HasMany(() => PatternParams)
+  params: PatternParams[];
 
-  @BelongsToMany(() => ParameterToys, () => McParameterToys)
-  parameterToys: ParameterToys[];
+  @HasOne(() => FilesMasterClass)
+  files: FilesMasterClass;
 }

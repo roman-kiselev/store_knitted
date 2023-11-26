@@ -1,12 +1,19 @@
 import React from "react";
+import { TypeFile } from "../../enums";
 import { Row } from "../layout";
 import styles from "./styles/input-file.module.css";
 
 interface InputFileProps {
+    header?: string;
     onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+    typeFile?: TypeFile;
 }
 
-const InputFile: React.FC<InputFileProps> = ({ onChange }) => {
+const InputFile: React.FC<InputFileProps> = ({
+    onChange,
+    header = "Выбор файла",
+    typeFile = TypeFile.IMAGE,
+}) => {
     return (
         <Row mb={5} mt={5}>
             {/* <input
@@ -18,12 +25,12 @@ const InputFile: React.FC<InputFileProps> = ({ onChange }) => {
                 title="Выберите файлы"
             /> */}
             <label className={styles.fileButton}>
-                <span>Выбор файла</span>
+                <span>{header}</span>
                 <input
                     className={styles.fileContainer}
                     type="file"
                     onChange={onChange}
-                    accept="image/*"
+                    accept={typeFile}
                     multiple
                     lang="ru"
                 />

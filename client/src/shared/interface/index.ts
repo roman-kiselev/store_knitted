@@ -5,8 +5,10 @@ import {
     ICurrencySlice,
     IFormsSlice,
     ILanguageSlice,
+    IParamsPattern,
     IToken,
     IUserLogin,
+    IValue,
 } from "./models";
 
 export type {
@@ -16,6 +18,8 @@ export type {
     ICurrencySlice,
     IFormsSlice,
     ILanguageSlice,
+    IParamsPattern,
     IToken,
     IUserLogin,
+    IValue,
 };

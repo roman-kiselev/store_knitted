@@ -2,23 +2,29 @@ import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { MulterModule } from '@nestjs/platform-express';
 import { SequelizeModule } from '@nestjs/sequelize';
+
 import { AuthModule } from './auth/auth.module';
 import { FilesMasterClassModule } from './files-master-class/files-master-class.module';
 import { FilesModule } from './files/files.module';
 import { ImagesMasterClassModule } from './images-master-class/images-master-class.module';
 import { MasterClassModule } from './master-class/master-class.module';
 import { ParametrToysModule } from './parametr-toys/parametr-toys.module';
+import { PatternParamsModule } from './pattern-params/pattern-params.module';
+import { PaymentModule } from './payment/payment.module';
 import { RoleModule } from './role/role.module';
 import { UserModule } from './user/user.module';
 import { ValueParameterModule } from './value-parameter/value-parameter.module';
-import { PaymentModule } from './payment/payment.module';
-
+// console.log(process.env.MYSQL_HOST);
+// console.log(process.env.MYSQL_PORT);
+// console.log(process.env.MYSQL_USERNAME);
+// console.log(process.env.MYSQL_PASSWORD);
+// console.log(process.env.MYSQL_DATABASE);
+// console.log(process.env.NODE_ENV);
 @Module({
   imports: [
     MulterModule.register({
       dest: '/upload',
     }),
-
     ConfigModule.forRoot({
       envFilePath: `${process.env.NODE_ENV}.env`,
     }),
@@ -32,7 +38,7 @@ import { PaymentModule } from './payment/payment.module';
       models: [],
       autoLoadModels: true,
       synchronize: true,
-      //sync: { force: true },
+      sync: { force: true },
     }),
     UserModule,
     AuthModule,
@@ -40,14 +46,11 @@ import { PaymentModule } from './payment/payment.module';
     MasterClassModule,
     ImagesMasterClassModule,
     ParametrToysModule,
-
     FilesMasterClassModule,
-
     ValueParameterModule,
-
     FilesModule,
-
     PaymentModule,
+    PatternParamsModule,
   ],
   controllers: [],
   providers: [],

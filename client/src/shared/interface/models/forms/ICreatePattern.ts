@@ -1,5 +1,9 @@
+import { IParamsPattern } from "./IParamsPattern";
+
 export interface ICreatePattern {
-    index: number;
-    valueRu: string;
-    valueEng: string;
+    nameRu: string;
+    nameEng: string;
+    params: IParamsPattern[] | [];
+    priceRu: number;
+    priceEng: number;
 }

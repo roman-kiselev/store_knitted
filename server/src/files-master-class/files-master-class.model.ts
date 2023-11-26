@@ -8,7 +8,10 @@ import {
 import { MasterClass } from 'src/master-class/master-class.model';
 
 interface FilesMasterClassAttr {
-  name: string;
+  mainImg: string;
+  nameRu: string;
+  nameEng: string;
+  massterClassId: number;
 }
 
 @Table({ tableName: 'files-master-class' })
@@ -28,8 +31,25 @@ export class FilesMasterClass extends Model<
     type: DataType.STRING,
     unique: true,
   })
-  name: string;
+  mainImg: string;
+
+  @Column({
+    type: DataType.STRING,
+    unique: true,
+  })
+  nameRu: string;
+
+  @Column({
+    type: DataType.STRING,
+    unique: true,
+    allowNull: true,
+  })
+  nameEng: string;
 
   @ForeignKey(() => MasterClass)
   masterClassId: number;
+  // @Column({
+  //   type: DataType.INTEGER,
+  // })
+  // masterClassId: number;
 }
