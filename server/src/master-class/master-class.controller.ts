@@ -19,8 +19,8 @@ import { MasterClassService } from './master-class.service';
 export class MasterClassController {
   constructor(private masterClassService: MasterClassService) {}
 
-  @Role('admin')
-  @UseGuards(RoleGuard)
+  // @Role('admin')
+  // @UseGuards(RoleGuard)
   @Get('/')
   getAllMasterClass() {
     return this.masterClassService.getAllMasterClass();
@@ -33,8 +33,8 @@ export class MasterClassController {
     return this.masterClassService.getOneMasterClassById(id);
   }
 
-  @Role('admin')
-  @UseGuards(RoleGuard)
+  // @Role('admin')
+  // @UseGuards(RoleGuard)
   @Post('/')
   @UseInterceptors(
     FileFieldsInterceptor([

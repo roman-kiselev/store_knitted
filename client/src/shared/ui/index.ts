@@ -4,6 +4,7 @@ import { Input, InputFile, InputNumber } from "./input";
 import {
     Col,
     Container,
+    Footer,
     Header,
     HeaderConteinerBottom,
     HeaderTop,
@@ -19,6 +20,7 @@ export {
     Button,
     Col,
     Container,
+    Footer,
     Header,
     HeaderConteinerBottom,
     HeaderTop,

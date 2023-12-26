@@ -11,7 +11,7 @@ interface FilesMasterClassAttr {
   mainImg: string;
   nameRu: string;
   nameEng: string;
-  massterClassId: number;
+  masterClassId: number;
 }
 
 @Table({ tableName: 'files-master-class' })
@@ -48,8 +48,6 @@ export class FilesMasterClass extends Model<
 
   @ForeignKey(() => MasterClass)
   masterClassId: number;
-  // @Column({
-  //   type: DataType.INTEGER,
-  // })
+
   // masterClassId: number;
 }

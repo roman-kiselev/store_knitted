@@ -30,6 +30,10 @@ interface IContainerProps {
     contentHeight?: contentString;
     contentWidth?: contentString;
     className?: string[] | string;
+    wrap?: boolean;
+    flexBasis?: string;
+    justifyContent?: string;
+    alignItems?: string;
 }
 
 const Container: React.FC<IContainerProps> = ({
@@ -37,6 +41,10 @@ const Container: React.FC<IContainerProps> = ({
     contentHeight = "auto",
     contentWidth,
     className,
+    wrap,
+    flexBasis,
+    alignItems,
+    justifyContent,
 }) => {
     const hasRow =
         Array.isArray(children) &&
@@ -51,6 +59,10 @@ const Container: React.FC<IContainerProps> = ({
                 flexDirection,
                 height: contentHeight,
                 width: contentWidth,
+                flexWrap: wrap ? "wrap" : "nowrap",
+                flexBasis: flexBasis ? flexBasis : "auto",
+                justifyContent: justifyContent ? justifyContent : "flex-start",
+                alignItems: alignItems ? alignItems : "flex-start",
             }}
             className={[styles.container, className].join(" ")}
         >

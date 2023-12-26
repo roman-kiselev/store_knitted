@@ -1,17 +1,17 @@
 import { useState } from "react";
-import { Header, Layout } from "../../shared/ui";
-
 import { Outlet } from "react-router";
+import { Footer } from "../../shared/ui";
+import { ContainerB, Header } from "../../shared/ui/layout";
 
 const LayoutPage = () => {
     const [nav, setNav] = useState(false);
     return (
-        <Layout>
+        // <Layout>
+        <ContainerB>
             <Header />
             <Outlet />
-            {/* <CarouselStore />
-            <ListCard /> */}
-        </Layout>
+            <Footer />
+        </ContainerB>
     );
 };
 

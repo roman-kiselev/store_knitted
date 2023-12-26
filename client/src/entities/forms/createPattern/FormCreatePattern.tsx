@@ -50,7 +50,7 @@ const FormCreatePattern = () => {
             fileEng: fileEngState,
             params: createPattern.params,
         };
-
+        console.log(data);
         createPatternForm(data);
         // const formData = new FormData();
         // formData.append("nameRu", createPattern.nameRu);

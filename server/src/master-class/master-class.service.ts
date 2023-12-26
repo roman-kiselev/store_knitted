@@ -62,12 +62,15 @@ export class MasterClassService {
       if (pathFiles && pattern) {
         const { pathFileEng, pathFileRu, pathMainImage } = pathFiles;
 
-        const filesMasterClass = await this.filesMasterClassRepository.create({
-          mainImg: pathMainImage,
-          nameRu: pathFileRu,
-          nameEng: pathFileEng ? pathFileEng : null,
-          massterClassId: pattern.id,
-        });
+        const filesMasterClass = await this.filesMasterClassRepository.create(
+          {
+            mainImg: pathMainImage,
+            nameRu: pathFileRu,
+            nameEng: pathFileEng ? pathFileEng : null,
+            masterClassId: pattern.id,
+          },
+          { raw: true },
+        );
       }
 
       const allPattern = await this.masterClassRepository.findByPk(pattern.id, {

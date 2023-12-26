@@ -23,7 +23,7 @@ import { ValueParameterModule } from './value-parameter/value-parameter.module';
 @Module({
   imports: [
     MulterModule.register({
-      dest: '/upload',
+      dest: '/uploads',
     }),
     ConfigModule.forRoot({
       envFilePath: `${process.env.NODE_ENV}.env`,
@@ -38,7 +38,7 @@ import { ValueParameterModule } from './value-parameter/value-parameter.module';
       models: [],
       autoLoadModels: true,
       synchronize: true,
-      sync: { force: true },
+      //sync: { force: true },
     }),
     UserModule,
     AuthModule,

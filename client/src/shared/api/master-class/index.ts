@@ -1,7 +1,14 @@
+import { IMasterClass } from "../../interface/models/masterClass";
 import { mainApi } from "../main";
 
 export const masterClassApi = mainApi.injectEndpoints({
     endpoints: (builder) => ({
+        getAllMasterClass: builder.query<IMasterClass[], void>({
+            query: () => ({
+                url: "master-class",
+                method: "GET",
+            }),
+        }),
         createPattern: builder.mutation({
             query: (data) => {
                 const formData = new FormData();
