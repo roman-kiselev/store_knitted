@@ -6,9 +6,11 @@ import {
 import { adminMainApi, authApi, mainApi } from "../../shared/api";
 import {
     authReducer,
+    cartReducer,
     currencyReducer,
     formReducer,
     languageReducer,
+    masterClassReducer,
     navReducer,
 } from "../../shared/models";
 
@@ -18,6 +20,8 @@ const rootReducer = combineReducers({
     nav: navReducer,
     auth: authReducer,
     form: formReducer,
+    masterClass: masterClassReducer,
+    cart: cartReducer,
     [mainApi.reducerPath]: mainApi.reducer,
     [adminMainApi.reducerPath]: adminMainApi.reducer,
 });

@@ -19,17 +19,17 @@ const Header = () => {
                     <Logo />
                     <Menu>
                         <LinkNav
-                            path="/"
+                            path="/bestsellers"
                             title={language === "en" ? "Home" : "Главная"}
                         />
                         <LinkNav
-                            path="/cart"
+                            path="/patterns"
                             title={
                                 language === "en" ? "Patterns" : "Мастер класс"
                             }
                         />
                         <LinkNav
-                            path="/about"
+                            path="/toys"
                             title={language === "en" ? "Toys" : "Игрушки"}
                         />
                         <LinkNav

@@ -14,6 +14,7 @@ import { PaymentModule } from './payment/payment.module';
 import { RoleModule } from './role/role.module';
 import { UserModule } from './user/user.module';
 import { ValueParameterModule } from './value-parameter/value-parameter.module';
+
 // console.log(process.env.MYSQL_HOST);
 // console.log(process.env.MYSQL_PORT);
 // console.log(process.env.MYSQL_USERNAME);

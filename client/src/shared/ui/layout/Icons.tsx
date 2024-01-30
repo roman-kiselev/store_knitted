@@ -1,4 +1,5 @@
 import { AiOutlineClose, AiOutlineMenu } from "react-icons/ai";
+import { Link } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../../hooks";
 import { setNav } from "../../models";
 import cart from "./img/cart.png";
@@ -6,6 +7,7 @@ import styles from "./style/icons.module.css";
 const Icons = () => {
     const dispatch = useAppDispatch();
     const { nav } = useAppSelector((store) => store.nav);
+    const { total } = useAppSelector((store) => store.cart);
 
     return (
         <div className={styles.iconsContainer}>
@@ -16,8 +18,10 @@ const Icons = () => {
                         : styles.cartContainer
                 }
             >
-                <img className={styles.cart} src={cart} alt="cart" />
-                <span className={styles.count}>0</span>
+                <Link to={"/cart"}>
+                    <img className={styles.cart} src={cart} alt="cart" />
+                </Link>
+                <span className={styles.count}>{total}</span>
             </div>
 
             {nav ? (

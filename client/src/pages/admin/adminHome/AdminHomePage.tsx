@@ -27,6 +27,16 @@ const AdminHomePage = () => {
                                 titleLink="Список"
                             />
                         </Item>
+                        <Item title="Слайды">
+                            <ItemChild
+                                path="/admin/slides/createSlide"
+                                titleLink="Создать"
+                            />
+                            {/* <ItemChild
+                                path="/admin/products/list"
+                                titleLink="Список"
+                            /> */}
+                        </Item>
                     </LeftMenu>
                 </div>
                 <div className={styles.contentContainer}>

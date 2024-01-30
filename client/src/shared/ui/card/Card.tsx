@@ -1,10 +1,15 @@
+import { Col } from "antd";
 import { Link } from "react-router-dom";
-import { useAppSelector } from "../../hooks";
+import { useAppDispatch, useAppSelector } from "../../hooks";
 import { IMasterClass } from "../../interface/models/masterClass";
-import { ColB } from "../layout";
+import { addMasterClass } from "../../models";
 import cart from "./image/Cart.png";
 import view from "./image/view.png";
 import styles from "./styles/card.module.css";
+
+const getMasterClassById = (id: string, arr: IMasterClass[]) => {
+    return arr.find((item) => item.id === id);
+};
 
 interface CardProps {
     col?: "col-3" | "col-4" | "col-6" | "col-12";
@@ -12,14 +17,31 @@ interface CardProps {
     colMd?: "col-md-3" | "col-md-4" | "col-md-6" | "col-md-12";
     colSm?: "col-sm-3" | "col-sm-4" | "col-sm-6" | "col-sm-12";
     params: IMasterClass;
+    handleShowModal: (params: IMasterClass) => void;
 }
 
-const Card: React.FC<CardProps> = ({ col, colLg, params }) => {
+const Card: React.FC<CardProps> = ({ col, colLg, params, handleShowModal }) => {
+    const dispatch = useAppDispatch();
+    const { masterClass } = useAppSelector((store) => store.masterClass);
     const { language } = useAppSelector((store) => store.language);
+
+    const handleClickCart = (id: string) => {
+        const oneMasterClass = getMasterClassById(id, masterClass);
+        if (oneMasterClass) {
+            dispatch(addMasterClass(oneMasterClass));
+        }
+    };
 
     return (
         // <div className={styles.containerOneCard}>
-        <ColB col={col} colLg={colLg} colMd="col-md-4" colSm="col-sm-6">
+        <Col
+            style={{ display: "flex", justifyContent: "center" }}
+            span={7}
+            xs={10}
+            sm={12}
+            md={8}
+            lg={8}
+        >
             <div className={styles.Rounded_Rectangle_56}>
                 <div className={styles.Rounded_Rectangle_57}>
                     <img
@@ -33,10 +55,20 @@ const Card: React.FC<CardProps> = ({ col, colLg, params }) => {
 
                 <div className={styles.containerIcons}>
                     <Link to="cartLink">
-                        <img src={cart} alt="cart" className={styles.cart} />
+                        <img
+                            src={cart}
+                            onClick={() => handleClickCart(params.id)}
+                            alt="cart"
+                            className={styles.cart}
+                        />
                     </Link>
                     <Link to="view">
-                        <img src={view} alt="view" className={styles.view} />
+                        <img
+                            src={view}
+                            onClick={() => handleShowModal(params)}
+                            alt="view"
+                            className={styles.view}
+                        />
                     </Link>
                 </div>
 
@@ -65,7 +97,7 @@ const Card: React.FC<CardProps> = ({ col, colLg, params }) => {
                     {/* <div className={styles.price}>{params.priceRu} ₽</div> */}
                 </div>
             </div>
-        </ColB>
+        </Col>
     );
 };
 

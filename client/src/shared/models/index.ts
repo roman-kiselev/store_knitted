@@ -1,4 +1,5 @@
 import { authReducer, authSlice } from "./auth";
+import { addMasterClass, cartReducer, delMasterClass } from "./cart";
 import { currencyReducer, currencySlice, setCurrency } from "./currency";
 import {
     delRowParams,
@@ -12,13 +13,17 @@ import {
     pushParams,
 } from "./forms";
 import { languageReducer, languageSlice, setLanguage } from "./language";
+import { masterClassReducer, masterClassSlice } from "./master-class";
 import { navReducer, navSlice, setNav } from "./nav";
 
 export {
+    addMasterClass,
     authReducer,
     authSlice,
+    cartReducer,
     currencyReducer,
     currencySlice,
+    delMasterClass,
     delRowParams,
     editNameEng,
     editNameRu,
@@ -29,6 +34,8 @@ export {
     formSlice,
     languageReducer,
     languageSlice,
+    masterClassReducer,
+    masterClassSlice,
     navReducer,
     navSlice,
     pushParams,

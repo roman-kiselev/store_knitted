@@ -30,7 +30,7 @@ const HeaderTop = () => {
                         <option value="ru">Русский</option>
                     </select>
                 </div>
-                <div className={topStyles.currency}>
+                {/* <div className={topStyles.currency}>
                     <select
                         className={topStyles.select}
                         name="currency"
@@ -40,7 +40,7 @@ const HeaderTop = () => {
                         <option value="rub">Руб</option>
                         <option value="usd">USD</option>
                     </select>
-                </div>
+                </div> */}
             </div>
         </div>
     );
