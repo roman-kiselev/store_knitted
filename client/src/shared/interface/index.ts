@@ -1,20 +1,3 @@
-import {
-    CreateHandler,
-    IAuthSlice,
-    ICreatePattern,
-    ICurrencySlice,
-    IFilesMasterClass,
-    IFormsSlice,
-    ILanguageSlice,
-    IMasterClass,
-    IMasterClassSlice,
-    IParamsMasterClass,
-    IParamsPattern,
-    IToken,
-    IUserLogin,
-    IValue,
-} from "./models";
-
 export type {
     CreateHandler,
     IAuthSlice,
@@ -27,7 +10,8 @@ export type {
     IMasterClassSlice,
     IParamsMasterClass,
     IParamsPattern,
+    IPaymentSlice,
     IToken,
     IUserLogin,
     IValue,
-};
+} from "./models";

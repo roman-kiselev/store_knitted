@@ -16,6 +16,8 @@ import { languageReducer, languageSlice, setLanguage } from "./language";
 import { masterClassReducer, masterClassSlice } from "./master-class";
 import { navReducer, navSlice, setNav } from "./nav";
 
+export { paymentReducer, paymentSlice } from "./payment";
+
 export {
     addMasterClass,
     authReducer,

@@ -5,6 +5,7 @@ import { FilesMasterClass } from 'src/files-master-class/files-master-class.mode
 import { FilesService } from 'src/files/files.service';
 import { PatternParams } from 'src/pattern-params/pattern-params.model';
 import { CreateMasterClassDto } from './dto/create-master-class.dto';
+import { FormMasterClass } from './dto/form-master-class.dto';
 import { IFiles } from './interfaces/IFiles';
 import { IParamsPatterns } from './interfaces/IParamsPatterns';
 import { MasterClass } from './master-class.model';
@@ -109,6 +110,24 @@ export class MasterClassService {
         throw new HttpException('Мастер класс не найден', HttpStatus.NOT_FOUND);
       }
       return masterClass;
+    } catch (e) {
+      if (e instanceof HttpException) {
+        throw e;
+      }
+      throw new HttpException(e.message, HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+  }
+
+  async formPatternsAndSendEmail(dto: FormMasterClass) {
+    try {
+      const file = await this.filesService.copyFile(
+        dto.patterns[1].files.nameEng,
+      );
+
+      await this.filesService.preparePdfFile(
+        dto.email,
+        dto.patterns[1].files.nameEng,
+      );
     } catch (e) {
       if (e instanceof HttpException) {
         throw e;

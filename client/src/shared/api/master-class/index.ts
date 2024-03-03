@@ -28,5 +28,13 @@ export const masterClassApi = mainApi.injectEndpoints({
                 };
             },
         }),
+
+        formBuyPattern: builder.mutation({
+            query: (data) => ({
+                url: "master-class/buy-pattern",
+                method: "POST",
+                body: data,
+            }),
+        }),
     }),
 });

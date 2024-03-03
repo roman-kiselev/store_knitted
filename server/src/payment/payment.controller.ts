@@ -8,6 +8,12 @@ export class PaymentController {
 
   @Post('/')
   makePayment(@Body() dto: CreatePaymentDto) {
+    console.log(dto);
     return this.paymentsService.makePayment(dto);
+  }
+
+  @Post('/check')
+  checkPayment(@Body() dto: { idUser: string }) {
+    return this.paymentsService.checkPayment(dto);
   }
 }

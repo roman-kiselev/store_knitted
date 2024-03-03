@@ -1,8 +1,9 @@
 import { Spin } from "antd";
 import { Suspense, lazy } from "react";
 import { Route, Routes } from "react-router";
-import { CheckAuth } from "../shared/utils";
+import { CheckAuth, CheckTemporaryUser } from "../shared/utils";
 import LoginPage from "./admin/auth/LoginPage";
+import DownloadStatus from "./downloadPattern/DownloadStatus";
 import { HomePage, LayoutPage } from "./home";
 
 const AdminRouter = lazy(() => import("./admin"));
@@ -12,7 +13,14 @@ const Routing = () => {
     return (
         <Routes>
             <Route element={<LayoutPage />}>
-                <Route path="/*" element={<HomePage />} />
+                <Route
+                    path="/*"
+                    element={
+                        <CheckTemporaryUser>
+                            <HomePage />
+                        </CheckTemporaryUser>
+                    }
+                />
                 <Route path="/patterns/*" element={<p>Patterns</p>} />
                 <Route path="/toys/*" element={<p>Patterns</p>} />
                 <Route path="/contact/*" element={<p>Patterns</p>} />
@@ -20,7 +28,9 @@ const Routing = () => {
                     path="/cart/*"
                     element={
                         <Suspense fallback={<Spin />}>
-                            <CartRouter />
+                            <CheckTemporaryUser>
+                                <CartRouter />
+                            </CheckTemporaryUser>
                         </Suspense>
                     }
                 />
@@ -34,6 +44,7 @@ const Routing = () => {
                         </CheckAuth>
                     }
                 />
+                <Route path="/downloadStatus" element={<DownloadStatus />} />
             </Route>
 
             <Route path="/login" element={<LoginPage />} />

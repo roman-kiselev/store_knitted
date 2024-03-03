@@ -40,7 +40,7 @@ const Card: React.FC<CardProps> = ({ col, colLg, params, handleShowModal }) => {
             xs={10}
             sm={12}
             md={8}
-            lg={8}
+            lg={10}
         >
             <div className={styles.Rounded_Rectangle_56}>
                 <div className={styles.Rounded_Rectangle_57}>

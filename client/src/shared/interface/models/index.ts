@@ -10,6 +10,8 @@ import {
     IParamsMasterClass,
 } from "./masterClass";
 
+export type { IPaymentSlice } from "./payment";
+
 export type {
     CreateHandler,
     IAuthSlice,

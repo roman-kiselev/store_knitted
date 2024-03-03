@@ -1,5 +1,6 @@
 import { ModelAttributeColumnOptions } from 'sequelize';
 import {
+  BelongsToMany,
   Column,
   DataType,
   HasMany,
@@ -9,6 +10,8 @@ import {
 } from 'sequelize-typescript';
 import { FilesMasterClass } from 'src/files-master-class/files-master-class.model';
 import { PatternParams } from 'src/pattern-params/pattern-params.model';
+import { PaymentMasterclass } from 'src/payment/payment-masterclass.model';
+import { Payment } from 'src/payment/payment.model';
 
 interface MasterClassAttr {
   nameRu: string;
@@ -54,4 +57,7 @@ export class MasterClass extends Model<MasterClass, MasterClassAttr> {
 
   @HasOne(() => FilesMasterClass)
   files: FilesMasterClass;
+
+  @BelongsToMany(() => Payment, () => PaymentMasterclass)
+  payment: Payment[];
 }

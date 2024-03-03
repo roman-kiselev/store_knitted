@@ -14,6 +14,11 @@ import { PaymentModule } from './payment/payment.module';
 import { RoleModule } from './role/role.module';
 import { UserModule } from './user/user.module';
 import { ValueParameterModule } from './value-parameter/value-parameter.module';
+import { MailModule } from './mail/mail.module';
+import { TempUserModule } from './temp-user/temp-user.module';
+import { CartModule } from './cart/cart.module';
+import { ToysModule } from './toys/toys.module';
+import { DatabaseModule } from './database/database.module';
 
 // console.log(process.env.MYSQL_HOST);
 // console.log(process.env.MYSQL_PORT);
@@ -52,6 +57,11 @@ import { ValueParameterModule } from './value-parameter/value-parameter.module';
     FilesModule,
     PaymentModule,
     PatternParamsModule,
+    MailModule,
+    TempUserModule,
+    CartModule,
+    ToysModule,
+    DatabaseModule,
   ],
   controllers: [],
   providers: [],

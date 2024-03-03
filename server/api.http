@@ -1,5 +1,5 @@
 @hostJob = http://192.168.3.16:7000
-@hostHome = http://192.168.1.14:7000
+@hostHome = http://192.168.1.15:7000
 
 @host = {{hostHome}}
 
@@ -89,6 +89,8 @@ Authorization: Bearer {{token}}
 
 
 
+
+
 ### ------ Параметры мастер класса---------------------------------------
 ### Get All Value 
 GET {{host}}/value-parameter HTTP/1.1
@@ -147,3 +149,20 @@ Content-type: application/json; charset=utf-8
     "masterClass": [1, 2]
 }
 ###
+
+### ------- Payments Check -------------
+
+POST {{host}}/payment/check HTTP/1.1
+Content-type: application/json; charset=utf-8
+
+{
+    "idUser": "ae4e2d37-b7e3-4cb5-85a2-ee65e45cebeb",
+}
+###
+
+
+
+### Get MasterClass by Id 
+GET {{host}}/mail/test HTTP/1.1
+
+####

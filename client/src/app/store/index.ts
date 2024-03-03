@@ -12,6 +12,7 @@ import {
     languageReducer,
     masterClassReducer,
     navReducer,
+    paymentReducer,
 } from "../../shared/models";
 
 const rootReducer = combineReducers({
@@ -22,6 +23,7 @@ const rootReducer = combineReducers({
     form: formReducer,
     masterClass: masterClassReducer,
     cart: cartReducer,
+    payment: paymentReducer,
     [mainApi.reducerPath]: mainApi.reducer,
     [adminMainApi.reducerPath]: adminMainApi.reducer,
 });
