@@ -1,5 +1,6 @@
 import { Module } from '@nestjs/common';
 import { SequelizeModule } from '@nestjs/sequelize';
+import { DatabaseModule } from 'src/database/database.module';
 import { TempUser } from 'src/temp-user/temp-user.model';
 import { CartPattern } from './cart-pattern.model';
 import { CartToys } from './cart-toys.model';
@@ -12,6 +13,8 @@ import { CartService } from './cart.service';
   providers: [CartService],
   imports: [
     SequelizeModule.forFeature([Cart, TempUser, CartPattern, CartToys]),
+    DatabaseModule,
   ],
+  exports: [CartService],
 })
 export class CartModule {}

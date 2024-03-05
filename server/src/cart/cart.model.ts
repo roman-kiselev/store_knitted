@@ -14,6 +14,8 @@ import { CartToys } from './cart-toys.model';
 
 export interface CartAttr {
   idTempUser: number;
+  totalPriceRu: number;
+  totalPriceEng: number;
 }
 
 @Table({ tableName: 'cart' })

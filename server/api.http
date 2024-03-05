@@ -165,4 +165,8 @@ Content-type: application/json; charset=utf-8
 ### Get MasterClass by Id 
 GET {{host}}/mail/test HTTP/1.1
 
+
+### Проверить и создать пользователя и корзину
+GET {{host}}/temp-user/?id=1daf-sdfaf-sdfsdf-s5fsf HTTP/1.1
+
 ####

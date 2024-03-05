@@ -1,6 +1,8 @@
 export type {
     CreateHandler,
     IAuthSlice,
+    ICart,
+    ICartSlice,
     ICreatePattern,
     ICurrencySlice,
     IFilesMasterClass,
@@ -11,7 +13,10 @@ export type {
     IParamsMasterClass,
     IParamsPattern,
     IPaymentSlice,
+    ITempUser,
+    ITempUserSlice,
     IToken,
+    IUserData,
     IUserLogin,
     IValue,
 } from "./models";

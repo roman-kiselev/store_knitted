@@ -20,7 +20,7 @@ export const masterClassApi = mainApi.injectEndpoints({
                 formData.append("fileRu", data.fileRu as File);
                 formData.append("fileEng", data.fileEng as File);
                 formData.append("params", JSON.stringify(data.params));
-                console.log(data);
+
                 return {
                     url: "master-class",
                     method: "POST",

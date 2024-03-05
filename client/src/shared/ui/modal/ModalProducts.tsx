@@ -16,7 +16,7 @@ const ModalProducts: React.FC<IModalProductsProps> = ({
     open,
 }) => {
     const { language } = useAppSelector((store) => store.language);
-    console.log(dataOneItem);
+
     // Получим ссылку(path)
     const path = window.location.pathname;
 

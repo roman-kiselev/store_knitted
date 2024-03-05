@@ -43,7 +43,7 @@ const EmailForm: React.FC<IEmailForm> = ({
         // };
         // buyPatterns(data);
         const idUserTemporary = uuid();
-        console.log(idUserTemporary);
+
         const arrPatterns = patterns.map((item) => Number(item.id));
         createPayment({
             amount: sumTotalRu.toString(),

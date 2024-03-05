@@ -1,6 +1,4 @@
-import { authApi } from "./auth";
-import { masterClassApi } from "./master-class";
-
-import { adminMainApi, mainApi } from "./main";
-
-export { adminMainApi, authApi, mainApi, masterClassApi };
+export { authApi } from "./auth";
+export { adminMainApi, mainApi } from "./main";
+export { masterClassApi } from "./master-class";
+export { tempUserApi } from "./tempUser";
