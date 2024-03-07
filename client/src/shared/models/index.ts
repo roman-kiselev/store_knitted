@@ -1,7 +1,7 @@
-import { authReducer, authSlice } from "./auth";
-import { addMasterClass, cartReducer, delMasterClass } from "./cart";
-import { currencyReducer, currencySlice, setCurrency } from "./currency";
-import {
+export { authReducer, authSlice } from "./auth";
+export { addMasterClass, cartReducer, delMasterClass } from "./cart";
+export { currencyReducer, currencySlice, setCurrency } from "./currency";
+export {
     delRowParams,
     editNameEng,
     editNameRu,
@@ -12,36 +12,13 @@ import {
     formSlice,
     pushParams,
 } from "./forms";
-import { languageReducer, languageSlice, setLanguage } from "./language";
-import { masterClassReducer, masterClassSlice } from "./master-class";
-import { navReducer, navSlice, setNav } from "./nav";
+export { languageReducer, languageSlice, setLanguage } from "./language";
+export { masterClassReducer, masterClassSlice } from "./master-class";
+export { navReducer, navSlice, setNav } from "./nav";
+export {
+    CheckAndCreateTempUser,
+    tempUserReducer,
+    tempUserSlice,
+} from "./tempUser";
 
 export { paymentReducer, paymentSlice } from "./payment";
-
-export {
-    addMasterClass,
-    authReducer,
-    authSlice,
-    cartReducer,
-    currencyReducer,
-    currencySlice,
-    delMasterClass,
-    delRowParams,
-    editNameEng,
-    editNameRu,
-    editParams,
-    editPriceEng,
-    editPriceRu,
-    formReducer,
-    formSlice,
-    languageReducer,
-    languageSlice,
-    masterClassReducer,
-    masterClassSlice,
-    navReducer,
-    navSlice,
-    pushParams,
-    setCurrency,
-    setLanguage,
-    setNav,
-};

@@ -1,14 +1,14 @@
 import { CaseReducer } from "@reduxjs/toolkit";
 import { CreateHandler, ITempUserSlice, IUserData } from "../../interface";
 
+interface IUserDataPayload {
+    userData: IUserData;
+}
+
 class CheckAndCreateTempUser
-    implements
-        CreateHandler<ITempUserSlice, { userData: IUserData }, { err: string }>
+    implements CreateHandler<ITempUserSlice, IUserDataPayload, { err: string }>
 {
-    pending: CaseReducer<
-        ITempUserSlice,
-        { payload: { userData: IUserData }; type: string }
-    > = (state) => {
+    pending: CaseReducer<ITempUserSlice> = (state) => {
         state.isLoading = true;
         state.id = 0;
         state.uuid = "";
@@ -47,3 +47,5 @@ class CheckAndCreateTempUser
         state.isError = true;
     };
 }
+
+export default new CheckAndCreateTempUser();

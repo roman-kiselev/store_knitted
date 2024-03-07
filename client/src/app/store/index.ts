@@ -13,6 +13,7 @@ import {
     masterClassReducer,
     navReducer,
     paymentReducer,
+    tempUserReducer,
 } from "../../shared/models";
 
 const rootReducer = combineReducers({
@@ -24,6 +25,7 @@ const rootReducer = combineReducers({
     masterClass: masterClassReducer,
     cart: cartReducer,
     payment: paymentReducer,
+    tempUser: tempUserReducer,
     [mainApi.reducerPath]: mainApi.reducer,
     [adminMainApi.reducerPath]: adminMainApi.reducer,
 });
