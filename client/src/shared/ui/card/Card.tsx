@@ -2,7 +2,6 @@ import { Col } from "antd";
 import { Link } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../../hooks";
 import { IMasterClass } from "../../interface/models/masterClass";
-import { addMasterClass } from "../../models";
 import cart from "./image/Cart.png";
 import view from "./image/view.png";
 import styles from "./styles/card.module.css";
@@ -28,7 +27,7 @@ const Card: React.FC<CardProps> = ({ col, colLg, params, handleShowModal }) => {
     const handleClickCart = (id: string) => {
         const oneMasterClass = getMasterClassById(id, masterClass);
         if (oneMasterClass) {
-            dispatch(addMasterClass(oneMasterClass));
+            // dispatch(addMasterClass(oneMasterClass));
         }
     };
 

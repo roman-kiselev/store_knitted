@@ -1,9 +1,5 @@
-import { IUserData } from "../../interface/models";
+import { IUserDataPayload } from "../../interface";
 import { mainApi } from "../main";
-
-interface IUserDataPayload {
-    userData: IUserData;
-}
 
 export const tempUserApi = mainApi.injectEndpoints({
     endpoints: (builder) => ({

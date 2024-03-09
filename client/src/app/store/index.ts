@@ -24,8 +24,8 @@ const rootReducer = combineReducers({
     form: formReducer,
     masterClass: masterClassReducer,
     cart: cartReducer,
+    temproryUser: tempUserReducer,
     payment: paymentReducer,
-    tempUser: tempUserReducer,
     [mainApi.reducerPath]: mainApi.reducer,
     [adminMainApi.reducerPath]: adminMainApi.reducer,
 });

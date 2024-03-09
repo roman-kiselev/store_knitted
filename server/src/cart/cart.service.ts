@@ -1,7 +1,12 @@
-import { Injectable } from '@nestjs/common';
+import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/sequelize';
+import { MasterClass } from 'src/master-class/master-class.model';
+import { TempUser } from 'src/temp-user/temp-user.model';
+import { Toys } from 'src/toys/toys.model';
 import { DatabaseService } from './../database/database.service';
+import { CartPattern } from './cart-pattern.model';
 import { Cart } from './cart.model';
+import { AddPatternToCart } from './dto/add-pattern-to-cart.dto';
 import { CreateCart } from './dto/create-cart.dto';
 
 @Injectable()
@@ -9,9 +14,11 @@ export class CartService {
   constructor(
     @InjectModel(Cart) private cartRepository: typeof Cart,
     private databaseService: DatabaseService,
+    @InjectModel(MasterClass) private masterClassRepository: typeof MasterClass,
+    @InjectModel(Toys) private toysRepository: typeof Toys,
+    @InjectModel(TempUser) private tempUserRepository: typeof TempUser,
+    @InjectModel(CartPattern) private cartPatternRepository: typeof CartPattern,
   ) {}
-
-  // Создание корзины
 
   async createCart(dto: CreateCart) {
     try {
@@ -40,14 +47,102 @@ export class CartService {
 
   async getCartById(id: string) {
     try {
-      const cart = await this.cartRepository.findByPk(id);
+      const cart = await this.cartRepository.findByPk(id, {
+        include: {
+          model: MasterClass,
+        },
+      });
+
       return cart;
     } catch (e) {
       console.log(e);
     }
   }
 
+  async addPatternToCart(dto: AddPatternToCart) {
+    try {
+      const { idCart, idPattern, idTempUser } = dto;
+      const cart = await this.cartRepository.findByPk(idCart);
+      const pattern = await this.masterClassRepository.findByPk(idPattern);
+      const tempUser = await this.tempUserRepository.findByPk(idTempUser);
+      if (!cart) {
+        throw new HttpException('Корзина не найдена', HttpStatus.BAD_REQUEST);
+      }
+      if (!pattern) {
+        throw new HttpException(
+          'Мастер класс не найден',
+          HttpStatus.BAD_REQUEST,
+        );
+      }
+      if (!tempUser) {
+        throw new HttpException(
+          'Пользователь не найден',
+          HttpStatus.BAD_REQUEST,
+        );
+      }
+      if (cart && pattern && tempUser) {
+        const cartPattern = await this.cartPatternRepository.findOne({
+          where: { cartId: idCart, patternId: idPattern },
+        });
+        if (!cartPattern) {
+          const newCartPattern = await this.cartPatternRepository.create({
+            cartId: cart.id,
+            patternId: pattern.id,
+            quantity: 1,
+          });
+          await cart.update({
+            totalPriceEng: cart.totalPriceEng + pattern.priceEng,
+          });
+          await cart.update({
+            totalPriceRu: cart.totalPriceRu + pattern.priceRu,
+          });
+        }
+      }
+    } catch (e) {
+      if (e instanceof HttpException) {
+        throw e;
+      }
+      throw new HttpException(
+        'Ошибка сервера',
+        HttpStatus.INTERNAL_SERVER_ERROR,
+      );
+    }
+  }
+
   // Удаление корзины
+  async deletePatternFromCart(id: string) {
+    try {
+      const cartPattern = await this.cartPatternRepository.findByPk(id);
+      const cart = await this.cartRepository.findByPk(cartPattern.cartId);
+      const pattern = await this.masterClassRepository.findByPk(
+        cartPattern.patternId,
+      );
+      if (!cartPattern) {
+        throw new HttpException('Не найден', HttpStatus.BAD_REQUEST);
+      }
+      await cartPattern.destroy();
+
+      if (!cart) {
+        throw new HttpException('Не найден', HttpStatus.BAD_REQUEST);
+      }
+      await cart.update({
+        totalPriceEng: cart.totalPriceEng - pattern.priceEng,
+      });
+      await cart.update({
+        totalPriceRu: cart.totalPriceRu - pattern.priceRu,
+      });
+
+      return cart;
+    } catch (e) {
+      if (e instanceof HttpException) {
+        throw e;
+      }
+      throw new HttpException(
+        'Ошибка сервера',
+        HttpStatus.INTERNAL_SERVER_ERROR,
+      );
+    }
+  }
   // Обновление корзины
   // Проверка создания
 }

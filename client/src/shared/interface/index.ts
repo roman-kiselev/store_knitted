@@ -9,6 +9,7 @@ export type {
     IFormsSlice,
     ILanguageSlice,
     IMasterClass,
+    IMasterClassForCart,
     IMasterClassSlice,
     IParamsMasterClass,
     IParamsPattern,
@@ -17,6 +18,7 @@ export type {
     ITempUserSlice,
     IToken,
     IUserData,
+    IUserDataPayload,
     IUserLogin,
     IValue,
 } from "./models";

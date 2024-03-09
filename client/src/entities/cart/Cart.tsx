@@ -1,7 +1,7 @@
 import { Col, Row } from "antd";
 import { useState } from "react";
 import { useNavigate } from "react-router";
-import { masterClassApi } from "../../shared/api";
+import { cartApi, masterClassApi } from "../../shared/api";
 import { useAppDispatch, useAppSelector } from "../../shared/hooks";
 import { IMasterClass } from "../../shared/interface";
 import { ModalProducts } from "../../shared/ui";
@@ -13,10 +13,12 @@ const Cart = () => {
     const navigate = useNavigate();
 
     const { language } = useAppSelector((store) => store.language);
-    const { patterns, sumTotalRu, sumTotalEng } = useAppSelector(
+    const { patterns, totalPriceRu, totalPriceEng, idCart } = useAppSelector(
         (store) => store.cart
     );
+    const { data: dataCart } = cartApi.useGetCartByIdQuery({ idCart });
 
+    console.log(dataCart);
     const [buyPatterns, { data: dataPatterns }] =
         masterClassApi.useFormBuyPatternMutation();
 
@@ -67,15 +69,15 @@ const Cart = () => {
             >
                 <h3>
                     {language === "ru"
-                        ? `Итого ${sumTotalRu} ₽`
-                        : `Total ${sumTotalEng} $`}
+                        ? `Итого ${totalPriceRu} ₽`
+                        : `Total ${totalPriceEng} $`}
                 </h3>
             </Col>
             {patterns.length > 0 ? (
                 <EmailForm
                     patterns={patterns}
-                    sumTotalEng={sumTotalEng}
-                    sumTotalRu={sumTotalRu}
+                    sumTotalEng={totalPriceEng}
+                    sumTotalRu={totalPriceRu}
                 />
             ) : null}
         </Row>

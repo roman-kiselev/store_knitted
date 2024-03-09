@@ -1,1 +1,1 @@
-export { addMasterClass, cartReducer, delMasterClass } from "./CartSlice";
+export { cartReducer } from "./CartSlice";

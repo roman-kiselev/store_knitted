@@ -3,7 +3,6 @@ import { useState } from "react";
 import { masterClassApi } from "../../api";
 import { useAppDispatch, useAppSelector } from "../../hooks";
 import { IMasterClass } from "../../interface/models/masterClass";
-import { addMasterClass } from "../../models";
 import { ModalProducts } from "../modal";
 import Card from "./Card";
 
@@ -32,7 +31,7 @@ const ListCard: React.FC<IListCardProps> = ({ arrData }) => {
 
     const handleOk = () => {
         if (dataOneItem !== null) {
-            dispatch(addMasterClass(dataOneItem));
+            // dispatch(addMasterClass(dataOneItem));
         }
         setOpen(false);
     };

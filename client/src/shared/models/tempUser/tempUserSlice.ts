@@ -15,8 +15,8 @@ const initialState: ITempUserSlice = {
 };
 
 export const tempUserSlice = createSlice({
-    name: "tempUser",
     initialState,
+    name: "temproryUser",
     reducers: {},
     extraReducers: (builder) => {
         builder.addMatcher(
@@ -34,4 +34,4 @@ export const tempUserSlice = createSlice({
     },
 });
 
-export const tempUserReducer = tempUserApi.reducer;
+export const tempUserReducer = tempUserSlice.reducer;

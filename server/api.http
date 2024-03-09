@@ -170,3 +170,22 @@ GET {{host}}/mail/test HTTP/1.1
 GET {{host}}/temp-user/?id=1daf-sdfaf-sdfsdf-s5fsf HTTP/1.1
 
 ####
+
+
+### Получить корзину
+GET {{host}}/cart/13 HTTP/1.1
+
+####  Добавление мастер класса в  корзину
+POST {{host}}/cart/addPattern HTTP/1.1
+Content-type: application/json; charset=utf-8
+
+{
+    "idCart": 13,
+    "idTempUser": 13,
+    "idPattern": 1
+}
+
+### Удалить
+DELETE {{host}}/cart/deletePattern/2 HTTP/1.1
+
+####

@@ -6,4 +6,8 @@ export interface ICartSlice {
     totalPriceEng: number;
     idTempUser: number;
     patterns: IMasterClass[];
+    isLoading: boolean;
+    isError: boolean;
+    isSuccess: boolean;
+    messageError: string;
 }

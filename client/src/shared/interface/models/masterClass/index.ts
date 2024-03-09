@@ -1,11 +1,5 @@
-import { IFilesMasterClass } from "./IFilesMasterClass";
-import { IMasterClass } from "./IMasterClass";
-import { IMasterClassSlice } from "./IMasterClassSlice";
-import { IParamsMasterClass } from "./IParamsMasterClass";
-
-export type {
-    IFilesMasterClass,
-    IMasterClass,
-    IMasterClassSlice,
-    IParamsMasterClass,
-};
+export type { IFilesMasterClass } from "./IFilesMasterClass";
+export type { IMasterClass } from "./IMasterClass";
+export type { IMasterClassForCart } from "./IMasterClassForCart";
+export type { IMasterClassSlice } from "./IMasterClassSlice";
+export type { IParamsMasterClass } from "./IParamsMasterClass";

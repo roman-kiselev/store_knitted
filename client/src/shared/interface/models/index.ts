@@ -12,8 +12,14 @@ export type { ILanguageSlice } from "./language";
 export type {
     IFilesMasterClass,
     IMasterClass,
+    IMasterClassForCart,
     IMasterClassSlice,
     IParamsMasterClass,
 } from "./masterClass";
 export type { IPaymentSlice } from "./payment";
-export type { ITempUser, ITempUserSlice, IUserData } from "./tempUser";
+export type {
+    ITempUser,
+    ITempUserSlice,
+    IUserData,
+    IUserDataPayload,
+} from "./tempUser";

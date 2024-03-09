@@ -41,10 +41,12 @@ class CheckAndCreateTempUser
         state.updatedAt = updatedAtUser;
         state.isError = false;
         state.isSuccess = true;
+        state.isLoading = false;
     };
 
     rejected: CaseReducer<ITempUserSlice> = (state, action) => {
         state.isError = true;
+        state.isLoading = false;
     };
 }
 

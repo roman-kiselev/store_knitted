@@ -2,7 +2,6 @@ import { DeleteOutlined } from "@ant-design/icons";
 import { Avatar, Button, Col, List, Row, Tag } from "antd";
 import { useAppDispatch } from "../../shared/hooks";
 import { IMasterClass } from "../../shared/interface";
-import { delMasterClass } from "../../shared/models";
 
 interface IListPatterns {
     patterns: IMasterClass[];
@@ -18,7 +17,7 @@ const ListPatterns: React.FC<IListPatterns> = ({
     const dispatch = useAppDispatch();
 
     const handleDeletePattern = (id: string) => {
-        dispatch(delMasterClass(id));
+        // dispatch(delMasterClass(id));
     };
 
     return (
