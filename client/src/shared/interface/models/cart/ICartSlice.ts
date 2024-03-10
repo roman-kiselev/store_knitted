@@ -1,11 +1,11 @@
-import { IMasterClass } from "../masterClass";
+import { IMasterClassForCart } from "../masterClass";
 export interface ICartSlice {
     idCart: number;
     uuid: string;
     totalPriceRu: number;
     totalPriceEng: number;
     idTempUser: number;
-    patterns: IMasterClass[];
+    patterns: IMasterClassForCart[];
     isLoading: boolean;
     isError: boolean;
     isSuccess: boolean;

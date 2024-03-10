@@ -1,6 +1,28 @@
-import { createSlice } from "@reduxjs/toolkit";
-import { tempUserApi } from "../../api";
+import { ActionReducerMapBuilder, createSlice } from "@reduxjs/toolkit";
+import { cartApi, tempUserApi } from "../../api";
 import { ICartSlice } from "../../interface";
+import AddCartId from "./AddCartId";
+import AddPatternToCart from "./AddPatternToCart";
+import DelPatternInCart from "./DelPatternInCart";
+import GetFullCartById from "./GetFullCartById";
+
+// Реализую функцию builder
+export const delPatternInCartBuilder = (
+    builder: ActionReducerMapBuilder<ICartSlice>
+) => {
+    builder.addMatcher(
+        cartApi.endpoints.deletePatternFromCart.matchPending,
+        DelPatternInCart.pending
+    );
+    builder.addMatcher(
+        cartApi.endpoints.deletePatternFromCart.matchFulfilled,
+        DelPatternInCart.fulfilled
+    );
+    builder.addMatcher(
+        cartApi.endpoints.deletePatternFromCart.matchRejected,
+        DelPatternInCart.rejected
+    );
+};
 
 // interface ICartSlice {
 //     id: number | null;
@@ -59,31 +81,56 @@ const cartSlice = createSlice({
     extraReducers: (builder) => {
         builder.addMatcher(
             tempUserApi.endpoints.checkTemporaryUser.matchPending,
-            (state) => {
-                state.isLoading = true;
-                state.isError = false;
-            }
+            AddCartId.pending
         );
         builder.addMatcher(
             tempUserApi.endpoints.checkTemporaryUser.matchFulfilled,
-            (state, action) => {
-                const { cart, user } = action.payload.userData;
-                state.isLoading = false;
-                state.isSuccess = true;
-                state.isError = false;
-                state.idCart = cart.id;
-                state.uuid = user.uuidTempUser;
-                state.totalPriceRu = cart.totalPriceRu;
-                state.totalPriceEng = cart.totalPriceEng;
-            }
+            AddCartId.fulfilled
         );
         builder.addMatcher(
             tempUserApi.endpoints.checkTemporaryUser.matchRejected,
-            (state) => {
-                state.isLoading = false;
-                state.isError = true;
-            }
+            AddCartId.rejected
         );
+        // Получаем корзину по id
+        builder.addMatcher(
+            cartApi.endpoints.getCartById.matchPending,
+            GetFullCartById.pending
+        );
+        builder.addMatcher(
+            cartApi.endpoints.getCartById.matchFulfilled,
+            GetFullCartById.fulfilled
+        );
+        builder.addMatcher(
+            cartApi.endpoints.getCartById.matchRejected,
+            GetFullCartById.rejected
+        );
+        // Добавляем в корзину
+        builder.addMatcher(
+            cartApi.endpoints.addPatternInCart.matchPending,
+            AddPatternToCart.pending
+        );
+        builder.addMatcher(
+            cartApi.endpoints.addPatternInCart.matchFulfilled,
+            AddPatternToCart.fulfilled
+        );
+        builder.addMatcher(
+            cartApi.endpoints.addPatternInCart.matchRejected,
+            AddPatternToCart.rejected
+        );
+        // Удаление из корзины
+        delPatternInCartBuilder(builder);
+        // builder.addMatcher(
+        //     cartApi.endpoints.deletePatternFromCart.matchPending,
+        //     DelPatternInCart.pending
+        // );
+        // builder.addMatcher(
+        //     cartApi.endpoints.deletePatternFromCart.matchFulfilled,
+        //     DelPatternInCart.fulfilled
+        // );
+        // builder.addMatcher(
+        //     cartApi.endpoints.deletePatternFromCart.matchRejected,
+        //     DelPatternInCart.rejected
+        // );
     },
 });
 

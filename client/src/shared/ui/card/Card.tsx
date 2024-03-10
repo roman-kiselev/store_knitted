@@ -1,5 +1,6 @@
 import { Col } from "antd";
 import { Link } from "react-router-dom";
+import { cartApi } from "../../api";
 import { useAppDispatch, useAppSelector } from "../../hooks";
 import { IMasterClass } from "../../interface/models/masterClass";
 import cart from "./image/Cart.png";
@@ -21,14 +22,28 @@ interface CardProps {
 
 const Card: React.FC<CardProps> = ({ col, colLg, params, handleShowModal }) => {
     const dispatch = useAppDispatch();
+    const { id } = useAppSelector((store) => store.temproryUser);
+    const { idCart } = useAppSelector((store) => store.cart);
     const { masterClass } = useAppSelector((store) => store.masterClass);
     const { language } = useAppSelector((store) => store.language);
+    const [addInCart, { data: dataPatterns }] =
+        cartApi.useAddPatternInCartMutation();
 
-    const handleClickCart = (id: string) => {
-        const oneMasterClass = getMasterClassById(id, masterClass);
-        if (oneMasterClass) {
-            // dispatch(addMasterClass(oneMasterClass));
-        }
+    const handleClickCart = (idPattern: number) => {
+        // const oneMasterClass = getMasterClassById(id, masterClass);
+        // if (oneMasterClass) {
+        //     // dispatch(addMasterClass(oneMasterClass));
+        // }
+        console.log({
+            idPattern: idPattern,
+            idTempUser: id,
+            idCart: idCart,
+        });
+        addInCart({
+            idPattern: idPattern,
+            idTempUser: id,
+            idCart: idCart,
+        });
     };
 
     return (
@@ -56,7 +71,7 @@ const Card: React.FC<CardProps> = ({ col, colLg, params, handleShowModal }) => {
                     <Link to="cartLink">
                         <img
                             src={cart}
-                            onClick={() => handleClickCart(params.id)}
+                            onClick={() => handleClickCart(+params.id)}
                             alt="cart"
                             className={styles.cart}
                         />

@@ -1,7 +1,9 @@
 export type {
     CreateHandler,
+    IAddPatternToCartDto,
     IAuthSlice,
     ICart,
+    ICartPattern,
     ICartSlice,
     ICreatePattern,
     ICurrencySlice,

@@ -1,10 +1,11 @@
 import { DeleteOutlined } from "@ant-design/icons";
-import { Avatar, Button, Col, List, Row, Tag } from "antd";
-import { useAppDispatch } from "../../shared/hooks";
-import { IMasterClass } from "../../shared/interface";
+import { Avatar, Button, Col, List, Row, Spin, Tag } from "antd";
+import { cartApi } from "../../shared/api";
+import { useAppDispatch, useAppSelector } from "../../shared/hooks";
+import { IMasterClass, IMasterClassForCart } from "../../shared/interface";
 
 interface IListPatterns {
-    patterns: IMasterClass[];
+    patterns: IMasterClassForCart[];
     language: string;
     showModal: (item: IMasterClass) => void;
 }
@@ -15,8 +16,16 @@ const ListPatterns: React.FC<IListPatterns> = ({
     showModal,
 }) => {
     const dispatch = useAppDispatch();
+    const [delPattern, { data: dataCart }] =
+        cartApi.useDeletePatternFromCartMutation();
 
-    const handleDeletePattern = (id: string) => {
+    const { isLoading } = useAppSelector((store) => store.cart);
+
+    if (isLoading) {
+        return <Spin />;
+    }
+    const handleDeletePattern = (idCartPattern: number) => {
+        delPattern({ idCartPattern });
         // dispatch(delMasterClass(id));
     };
 
@@ -63,7 +72,9 @@ const ListPatterns: React.FC<IListPatterns> = ({
                                     <Col>
                                         <Button
                                             onClick={() =>
-                                                handleDeletePattern(item.id)
+                                                handleDeletePattern(
+                                                    item.idCartPattern
+                                                )
                                             }
                                         >
                                             <DeleteOutlined

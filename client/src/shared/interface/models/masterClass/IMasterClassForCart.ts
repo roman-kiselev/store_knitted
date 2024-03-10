@@ -1,4 +1,5 @@
-import { ICartPattern } from "../cart";
+import { IFilesMasterClass } from "./IFilesMasterClass";
+import { IParamsMasterClass } from "./IParamsMasterClass";
 
 export interface IMasterClassForCart {
     id: string;
@@ -9,5 +10,8 @@ export interface IMasterClassForCart {
     createdAt: Date;
     updatedAt: Date;
     deletedAt: null;
-    CartPattern: ICartPattern;
+    params: IParamsMasterClass[];
+    files: IFilesMasterClass;
+    quantity: number;
+    idCartPattern: number;
 }

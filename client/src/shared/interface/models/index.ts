@@ -1,6 +1,11 @@
 export type { CreateHandler } from "./CreateHandler";
 export type { IAuthSlice, IToken, IUserLogin } from "./auth";
-export type { ICart, ICartSlice } from "./cart";
+export type {
+    IAddPatternToCartDto,
+    ICart,
+    ICartPattern,
+    ICartSlice,
+} from "./cart";
 export type { ICurrencySlice } from "./currency";
 export type {
     ICreatePattern,

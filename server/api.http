@@ -182,7 +182,7 @@ Content-type: application/json; charset=utf-8
 {
     "idCart": 13,
     "idTempUser": 13,
-    "idPattern": 1
+    "idPattern": 6
 }
 
 ### Удалить

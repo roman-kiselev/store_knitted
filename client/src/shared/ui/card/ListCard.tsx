@@ -13,6 +13,7 @@ interface IListCardProps {
 const ListCard: React.FC<IListCardProps> = ({ arrData }) => {
     const dispatch = useAppDispatch();
     const { data } = masterClassApi.useGetAllMasterClassQuery();
+
     const { language } = useAppSelector((store) => store.language);
 
     const testArr = [];

@@ -1,6 +1,8 @@
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/sequelize';
+import { FilesMasterClass } from 'src/files-master-class/files-master-class.model';
 import { MasterClass } from 'src/master-class/master-class.model';
+import { PatternParams } from 'src/pattern-params/pattern-params.model';
 import { TempUser } from 'src/temp-user/temp-user.model';
 import { Toys } from 'src/toys/toys.model';
 import { DatabaseService } from './../database/database.service';
@@ -8,6 +10,7 @@ import { CartPattern } from './cart-pattern.model';
 import { Cart } from './cart.model';
 import { AddPatternToCart } from './dto/add-pattern-to-cart.dto';
 import { CreateCart } from './dto/create-cart.dto';
+import { ICart } from './interfaces/ICart';
 
 @Injectable()
 export class CartService {
@@ -52,8 +55,30 @@ export class CartService {
           model: MasterClass,
         },
       });
+      const copyCart: ICart = JSON.parse(JSON.stringify(cart));
+      const { patterns } = copyCart;
+      const newPatterns = [];
+      for (const item of patterns) {
+        const pattern = await this.masterClassRepository.findByPk(item.id, {
+          include: [
+            {
+              model: PatternParams,
+            },
+            {
+              model: FilesMasterClass,
+            },
+          ],
+        });
+        const jsonPattern = JSON.parse(JSON.stringify(pattern));
+        newPatterns.push({
+          ...jsonPattern,
+          quantity: item.CartPattern.quantity,
+          idCartPattern: item.CartPattern.id,
+        });
+      }
 
-      return cart;
+      copyCart.patterns = newPatterns;
+      return copyCart;
     } catch (e) {
       console.log(e);
     }
@@ -98,6 +123,9 @@ export class CartService {
           });
         }
       }
+
+      const updatedCart = await this.getCartById(cart.id.toString());
+      return updatedCart;
     } catch (e) {
       if (e instanceof HttpException) {
         throw e;
@@ -132,7 +160,8 @@ export class CartService {
         totalPriceRu: cart.totalPriceRu - pattern.priceRu,
       });
 
-      return cart;
+      const updatedCart = await this.getCartById(cart.id.toString());
+      return updatedCart;
     } catch (e) {
       if (e instanceof HttpException) {
         throw e;
