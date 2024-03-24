@@ -1,6 +1,6 @@
 import { Col } from "antd";
 import { Link } from "react-router-dom";
-import { cartApi } from "../../api";
+import { cartApi, masterClassApi } from "../../api";
 import { useAppDispatch, useAppSelector } from "../../hooks";
 import { IMasterClass } from "../../interface/models/masterClass";
 import cart from "./image/Cart.png";
@@ -22,9 +22,10 @@ interface CardProps {
 
 const Card: React.FC<CardProps> = ({ col, colLg, params, handleShowModal }) => {
     const dispatch = useAppDispatch();
-    const { id } = useAppSelector((store) => store.temproryUser);
+    const { id, uuid } = useAppSelector((store) => store.temproryUser);
     const { idCart } = useAppSelector((store) => store.cart);
     const { masterClass } = useAppSelector((store) => store.masterClass);
+    const [createView, { data }] = masterClassApi.useViewPatternMutation();
     const { language } = useAppSelector((store) => store.language);
     const [addInCart, { data: dataPatterns }] =
         cartApi.useAddPatternInCartMutation();
@@ -46,6 +47,11 @@ const Card: React.FC<CardProps> = ({ col, colLg, params, handleShowModal }) => {
         });
     };
 
+    const handleClickView = (params: IMasterClass) => {
+        handleShowModal(params);
+        createView({ masterClassId: Number(params.id), userTempId: uuid });
+    };
+
     return (
         // <div className={styles.containerOneCard}>
         <Col
@@ -54,7 +60,7 @@ const Card: React.FC<CardProps> = ({ col, colLg, params, handleShowModal }) => {
             xs={10}
             sm={12}
             md={8}
-            lg={10}
+            lg={7}
         >
             <div className={styles.Rounded_Rectangle_56}>
                 <div className={styles.Rounded_Rectangle_57}>
@@ -79,7 +85,7 @@ const Card: React.FC<CardProps> = ({ col, colLg, params, handleShowModal }) => {
                     <Link to="view">
                         <img
                             src={view}
-                            onClick={() => handleShowModal(params)}
+                            onClick={() => handleClickView(params)}
                             alt="view"
                             className={styles.view}
                         />

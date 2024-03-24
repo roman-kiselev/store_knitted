@@ -5,9 +5,12 @@ import { FilesMasterClass } from 'src/files-master-class/files-master-class.mode
 import { FilesService } from 'src/files/files.service';
 import { PatternParams } from 'src/pattern-params/pattern-params.model';
 import { CreateMasterClassDto } from './dto/create-master-class.dto';
+import { MasterClassViewDto } from './dto/create-view-master-class.dto';
 import { FormMasterClass } from './dto/form-master-class.dto';
 import { IFiles } from './interfaces/IFiles';
+import { IGetAllWithPagination } from './interfaces/IGetAllWithPagination';
 import { IParamsPatterns } from './interfaces/IParamsPatterns';
+import { MasterClassView } from './master-class-view.model';
 import { MasterClass } from './master-class.model';
 
 @Injectable()
@@ -17,6 +20,8 @@ export class MasterClassService {
     @InjectModel(PatternParams) private patternParams: typeof PatternParams,
     @InjectModel(FilesMasterClass)
     private filesMasterClassRepository: typeof FilesMasterClass,
+    @InjectModel(MasterClassView)
+    private masterClassViewRepository: typeof MasterClassView,
     private filesService: FilesService,
   ) {}
 
@@ -26,7 +31,6 @@ export class MasterClassService {
       const { nameEng, nameRu, params, priceEng, priceRu } = dto;
       const { fileEng, fileRu, mainImage } = files;
       const paramsArr: IParamsPatterns[] = JSON.parse(params);
-      console.log(paramsArr.length);
 
       // Проверяем наименование
       const isName = await this.masterClassRepository.findOne({
@@ -50,11 +54,13 @@ export class MasterClassService {
 
       if (paramsArr.length > 0 && pattern) {
         for (const item of paramsArr) {
+          console.log(item);
           const paramsPattern = await this.patternParams.create({
             valueEng: item.nameEng,
             valueRu: item.nameRu,
             masterClassId: pattern.id,
           });
+          console.log(item);
         }
       }
 
@@ -80,6 +86,7 @@ export class MasterClassService {
 
       return allPattern;
     } catch (e) {
+      console.log(e);
       if (e instanceof HttpException) {
         throw e;
       }
@@ -87,12 +94,24 @@ export class MasterClassService {
     }
   }
 
-  async getAllMasterClass() {
+  async getAllMasterClass(dto: IGetAllWithPagination) {
     try {
+      const { currentPage, offset, limit } = dto;
+      const curentOffset = currentPage * offset - offset;
+      const count = await this.masterClassRepository.count();
       const allMasterClass = await this.masterClassRepository.findAll({
-        include: { all: true },
+        include: [
+          {
+            model: PatternParams,
+          },
+          {
+            model: FilesMasterClass,
+          },
+        ],
+        limit: limit === 0 ? 6 : limit,
+        offset: curentOffset,
       });
-      return allMasterClass;
+      return { count: count, rows: allMasterClass };
     } catch (e) {
       if (e instanceof HttpException) {
         throw e;
@@ -128,6 +147,37 @@ export class MasterClassService {
         dto.email,
         dto.patterns[1].files.nameEng,
       );
+    } catch (e) {
+      if (e instanceof HttpException) {
+        throw e;
+      }
+      throw new HttpException(e.message, HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+  }
+
+  async viewPattern(dto: MasterClassViewDto) {
+    try {
+      console.log(dto);
+      const masterClass = await this.masterClassRepository.findByPk(
+        dto.masterClassId,
+      );
+      const checkViewMasterClass = await this.masterClassViewRepository.create({
+        userTempId: dto.userTempId,
+        masterClassId: masterClass.id,
+      });
+
+      if (checkViewMasterClass) {
+        return checkViewMasterClass;
+      }
+      if (!masterClass) {
+        throw new HttpException('Мастер класс не найден', HttpStatus.NOT_FOUND);
+      }
+
+      const viewMasterClass = await this.masterClassViewRepository.create({
+        userTempId: dto.userTempId,
+        masterClassId: masterClass.id,
+      });
+      return viewMasterClass;
     } catch (e) {
       if (e instanceof HttpException) {
         throw e;

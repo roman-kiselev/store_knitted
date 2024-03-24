@@ -91,12 +91,13 @@ export class PaymentService {
           value: dto.amount,
           currency: 'RUB',
         },
+        capture: true,
         payment_method_data: {
           type: 'bank_card',
         },
         confirmation: {
           type: 'redirect',
-          return_url: `http://localhost:3000/downloadStatus/?id=${dto.idUserTemporary}`,
+          return_url: `http://localhost:3000/downloadStatus`,
         },
       };
 
@@ -113,7 +114,7 @@ export class PaymentService {
           language: dto.language,
           idUserTemporary: dto.idUserTemporary,
         });
-        console.log(data);
+
         paymentId = payment.id.toString();
         for (const id of dto.masterClass) {
           payment.$add('masterClass', id);
@@ -133,14 +134,29 @@ export class PaymentService {
     try {
       const paymentData = await this.paymentRepository.findOne({
         where: { idUserTemporary: dto.idUser },
+        include: { model: MasterClass, as: 'masterClass' },
+        order: [['createdAt', 'DESC']],
+        limit: 1,
       });
+      console.log(paymentData);
+
       const checkout = new YooCheckout({
         shopId: '262605',
         secretKey: 'test_L2Zo-yZ_vvaxOdBbHo7RxVSzY79uBej6rDQpXz6fcw4',
       });
+
       if (paymentData) {
+        const masterClassId: number[] = paymentData.masterClass.map(
+          (item) => item.id,
+        );
         const payment = await checkout.getPayment(paymentData.paymentId);
-        return payment;
+        const copyPayment = JSON.parse(JSON.stringify(payment));
+        await this.sendPatterns({
+          email: paymentData.email,
+          masterClassId: masterClassId,
+          language: paymentData.language,
+        });
+        return { ...paymentData.dataValues, ...copyPayment };
       }
     } catch (e) {
       if (e instanceof HttpException) {

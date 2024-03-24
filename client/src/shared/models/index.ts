@@ -13,7 +13,11 @@ export {
     pushParams,
 } from "./forms";
 export { languageReducer, languageSlice, setLanguage } from "./language";
-export { masterClassReducer, masterClassSlice } from "./master-class";
+export {
+    masterClassReducer,
+    masterClassSlice,
+    setCurrentPage,
+} from "./master-class";
 export { navReducer, navSlice, setNav } from "./nav";
 export {
     CheckAndCreateTempUser,

@@ -118,7 +118,7 @@ Authorization: Bearer {{token}}
 
 ### ------ Создание мастер класса---------------------------------------
 ### Get All Value 
-GET {{host}}/master-class HTTP/1.1
+GET {{host}}/master-class/?page=1&limit=0&offset=1 HTTP/1.1
 Authorization: Bearer {{token}}
 ####
 
@@ -152,12 +152,9 @@ Content-type: application/json; charset=utf-8
 
 ### ------- Payments Check -------------
 
-POST {{host}}/payment/check HTTP/1.1
-Content-type: application/json; charset=utf-8
+GET {{host}}/payment/check/?idUser=ce4c7ed4-e901-47e9-bbc7-f7951a5b1004 HTTP/1.1
 
-{
-    "idUser": "ae4e2d37-b7e3-4cb5-85a2-ee65e45cebeb",
-}
+
 ###
 
 

@@ -8,6 +8,7 @@ import { FilesModule } from 'src/files/files.module';
 import { PatternParams } from 'src/pattern-params/pattern-params.model';
 import { PaymentMasterclass } from 'src/payment/payment-masterclass.model';
 import { Payment } from 'src/payment/payment.model';
+import { MasterClassView } from './master-class-view.model';
 import { MasterClassController } from './master-class.controller';
 import { MasterClass } from './master-class.model';
 import { MasterClassService } from './master-class.service';
@@ -24,10 +25,11 @@ import { MasterClassService } from './master-class.service';
       PaymentMasterclass,
       Cart,
       CartPattern,
+      MasterClassView,
     ]),
     AuthModule,
     FilesModule,
   ],
-  exports: [MasterClassService, MasterClassModule],
+  exports: [MasterClassService],
 })
 export class MasterClassModule {}

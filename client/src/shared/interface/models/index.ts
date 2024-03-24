@@ -1,4 +1,3 @@
-export type { CreateHandler } from "./CreateHandler";
 export type { IAuthSlice, IToken, IUserLogin } from "./auth";
 export type {
     IAddPatternToCartDto,
@@ -6,6 +5,7 @@ export type {
     ICartPattern,
     ICartSlice,
 } from "./cart";
+export type { CreateHandler } from "./CreateHandler";
 export type { ICurrencySlice } from "./currency";
 export type {
     ICreatePattern,
@@ -16,12 +16,15 @@ export type {
 export type { ILanguageSlice } from "./language";
 export type {
     IFilesMasterClass,
+    IGetAllMasterClassWithPag,
     IMasterClass,
     IMasterClassForCart,
     IMasterClassSlice,
+    IMasterClassView,
     IParamsMasterClass,
+    MasterClassViewDto,
 } from "./masterClass";
-export type { IPaymentSlice } from "./payment";
+export type { IPayment, IPaymentSlice } from "./payment";
 export type {
     ITempUser,
     ITempUserSlice,

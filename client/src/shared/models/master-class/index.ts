@@ -1,3 +1,5 @@
-import { masterClassReducer, masterClassSlice } from "./MasterClassSlice";
-
-export { masterClassReducer, masterClassSlice };
+export {
+    masterClassReducer,
+    masterClassSlice,
+    setCurrentPage,
+} from "./MasterClassSlice";

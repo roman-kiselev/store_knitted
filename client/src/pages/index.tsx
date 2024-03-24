@@ -5,6 +5,7 @@ import { CheckAuth, CheckTemporaryUser } from "../shared/utils";
 import LoginPage from "./admin/auth/LoginPage";
 import DownloadStatus from "./downloadPattern/DownloadStatus";
 import { HomePage, LayoutPage } from "./home";
+import PatternsPage from "./patterns/PatternsPage";
 
 const AdminRouter = lazy(() => import("./admin"));
 const CartRouter = lazy(() => import("./cart"));
@@ -21,8 +22,15 @@ const Routing = () => {
                         </CheckTemporaryUser>
                     }
                 />
-                <Route path="/patterns/*" element={<p>Patterns</p>} />
-                <Route path="/toys/*" element={<p>Patterns</p>} />
+                <Route
+                    path="/patterns/*"
+                    element={
+                        <CheckTemporaryUser>
+                            <PatternsPage />
+                        </CheckTemporaryUser>
+                    }
+                />
+                {/* <Route path="/toys/*" element={<p>Patterns</p>} /> */}
                 <Route path="/contact/*" element={<p>Patterns</p>} />
                 <Route
                     path="/cart/*"
@@ -44,7 +52,14 @@ const Routing = () => {
                         </CheckAuth>
                     }
                 />
-                <Route path="/downloadStatus" element={<DownloadStatus />} />
+                <Route
+                    path="/downloadStatus"
+                    element={
+                        <CheckTemporaryUser>
+                            <DownloadStatus />
+                        </CheckTemporaryUser>
+                    }
+                />
             </Route>
 
             <Route path="/login" element={<LoginPage />} />

@@ -1,13 +1,17 @@
 import { CaseReducer } from "@reduxjs/toolkit";
 import {
     CreateHandler,
-    IMasterClass,
+    IGetAllMasterClassWithPag,
     IMasterClassSlice,
 } from "../../interface";
 
 class GetAllMasterClass
     implements
-        CreateHandler<IMasterClassSlice, IMasterClass[], { message: string }>
+        CreateHandler<
+            IMasterClassSlice,
+            IGetAllMasterClassWithPag,
+            { message: string }
+        >
 {
     pending: CaseReducer<IMasterClassSlice> = (state, action) => {
         state.isError = false;
@@ -17,11 +21,15 @@ class GetAllMasterClass
     };
     fulfilled: CaseReducer<
         IMasterClassSlice,
-        { payload: IMasterClass[]; type: string }
+        { payload: IGetAllMasterClassWithPag; type: string }
     > = (state, action) => {
-        state.masterClass = action.payload;
+        state.isLoading = false;
+        state.isError = false;
+        state.masterClass = action.payload.rows;
+        state.totalCount = action.payload.count;
     };
     rejected: CaseReducer<IMasterClassSlice> = (state, action) => {
+        state.isLoading = false;
         state.isError = true;
         state.message = action.payload;
     };

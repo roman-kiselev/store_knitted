@@ -7,7 +7,7 @@ import styles from "./style/icons.module.css";
 const Icons = () => {
     const dispatch = useAppDispatch();
     const { nav } = useAppSelector((store) => store.nav);
-    const { totalPriceRu, totalPriceEng } = useAppSelector(
+    const { totalPriceRu, totalPriceEng, patterns } = useAppSelector(
         (store) => store.cart
     );
 
@@ -23,7 +23,7 @@ const Icons = () => {
                 <Link to={"/cart"}>
                     <img className={styles.cart} src={cart} alt="cart" />
                 </Link>
-                <span className={styles.count}>{totalPriceRu}</span>
+                <span className={styles.count}>{patterns.length}</span>
             </div>
 
             {nav ? (

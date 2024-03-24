@@ -1,15 +1,7 @@
-import { Cart } from "./cart";
-import { FormCreatePattern } from "./forms";
-import { AddOneImg } from "./imgEntities";
-import { LoginAdmin } from "./login";
-import { Bestsellers, Featured, Latest } from "./trendingProducts";
-
-export {
-    AddOneImg,
-    Bestsellers,
-    Cart,
-    Featured,
-    FormCreatePattern,
-    Latest,
-    LoginAdmin,
-};
+export { Cart } from "./cart";
+export { FormCreatePattern } from "./forms";
+export { AddOneImg } from "./imgEntities";
+export { LoginAdmin } from "./login";
+export { OnePattern } from "./pattern";
+export { PatternList } from "./patternList";
+export { Bestsellers, Featured, Latest } from "./trendingProducts";

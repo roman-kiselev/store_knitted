@@ -1,6 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { paymentApi } from "../../api/payment";
 import { IPaymentSlice } from "../../interface";
+import CheckPayment from "./CheckPayment";
 import CreatePayment from "./CreatePayment";
 
 const initialState: IPaymentSlice = {
@@ -28,6 +29,19 @@ export const paymentSlice = createSlice({
         builder.addMatcher(
             paymentApi.endpoints.createPayment.matchRejected,
             CreatePayment.rejected
+        );
+        // Check
+        builder.addMatcher(
+            paymentApi.endpoints.checkPayment.matchPending,
+            CheckPayment.pending
+        );
+        builder.addMatcher(
+            paymentApi.endpoints.checkPayment.matchFulfilled,
+            CheckPayment.fulfilled
+        );
+        builder.addMatcher(
+            paymentApi.endpoints.checkPayment.matchRejected,
+            CheckPayment.rejected
         );
     },
 });

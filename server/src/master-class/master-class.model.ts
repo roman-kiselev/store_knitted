@@ -12,6 +12,7 @@ import { FilesMasterClass } from 'src/files-master-class/files-master-class.mode
 import { PatternParams } from 'src/pattern-params/pattern-params.model';
 import { PaymentMasterclass } from 'src/payment/payment-masterclass.model';
 import { Payment } from 'src/payment/payment.model';
+import { MasterClassView } from './master-class-view.model';
 
 interface MasterClassAttr {
   nameRu: string;
@@ -32,13 +33,11 @@ export class MasterClass extends Model<MasterClass, MasterClassAttr> {
 
   @Column({
     type: DataType.STRING,
-    unique: true,
   })
   nameRu: string;
 
   @Column({
     type: DataType.STRING,
-    unique: true,
   })
   nameEng: string;
 
@@ -57,6 +56,9 @@ export class MasterClass extends Model<MasterClass, MasterClassAttr> {
 
   @HasOne(() => FilesMasterClass)
   files: FilesMasterClass;
+
+  @HasMany(() => MasterClassView)
+  masterClassView: MasterClassView[];
 
   @BelongsToMany(() => Payment, () => PaymentMasterclass)
   payment: Payment[];

@@ -1,4 +1,4 @@
-import { Body, Controller, Post } from '@nestjs/common';
+import { Body, Controller, Get, Post, Query } from '@nestjs/common';
 import { CreatePaymentDto } from './dto/create-payment.dto';
 import { PaymentService } from './payment.service';
 
@@ -6,14 +6,14 @@ import { PaymentService } from './payment.service';
 export class PaymentController {
   constructor(private paymentsService: PaymentService) {}
 
-  @Post('/')
-  makePayment(@Body() dto: CreatePaymentDto) {
-    console.log(dto);
-    return this.paymentsService.makePayment(dto);
+  @Get('/check/')
+  checkPayment(@Query('idUser') idUser: string) {
+    console.log(idUser);
+    return this.paymentsService.checkPayment({ idUser });
   }
 
-  @Post('/check')
-  checkPayment(@Body() dto: { idUser: string }) {
-    return this.paymentsService.checkPayment(dto);
+  @Post('/')
+  makePayment(@Body() dto: CreatePaymentDto) {
+    return this.paymentsService.makePayment(dto);
   }
 }

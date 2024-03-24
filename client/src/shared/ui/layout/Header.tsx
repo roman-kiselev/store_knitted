@@ -28,10 +28,10 @@ const Header = () => {
                                 language === "en" ? "Patterns" : "Мастер класс"
                             }
                         />
-                        <LinkNav
+                        {/* <LinkNav
                             path="/toys"
                             title={language === "en" ? "Toys" : "Игрушки"}
-                        />
+                        /> */}
                         <LinkNav
                             path="/contact"
                             title={language === "en" ? "Contact" : "Контакты"}

@@ -5,6 +5,9 @@ import GetAllMasterClass from "./GetAllMasterClass";
 
 const initialState: IMasterClassSlice = {
     masterClass: [],
+    currentPage: 1,
+    totalCount: 0,
+    pageSize: 1,
     isLoading: false,
     isError: false,
     message: "",
@@ -13,7 +16,11 @@ const initialState: IMasterClassSlice = {
 export const masterClassSlice = createSlice({
     initialState,
     name: "masterClass",
-    reducers: {},
+    reducers: {
+        setCurrentPage: (state, action) => {
+            state.currentPage = action.payload;
+        },
+    },
     extraReducers: (builder) => {
         builder.addMatcher(
             masterClassApi.endpoints.getAllMasterClass.matchPending,
@@ -31,4 +38,4 @@ export const masterClassSlice = createSlice({
 });
 
 export const masterClassReducer = masterClassSlice.reducer;
-export {};
+export const { setCurrentPage } = masterClassSlice.actions;

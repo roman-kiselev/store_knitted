@@ -1,6 +1,5 @@
 import { Button, Col, Form, Input } from "antd";
 import { useState } from "react";
-import { v4 as uuid } from "uuid";
 import { paymentApi } from "../../shared/api/payment";
 import { useAppSelector } from "../../shared/hooks";
 import { IMasterClass } from "../../shared/interface";
@@ -24,7 +23,7 @@ const EmailForm: React.FC<IEmailForm> = ({
     //http://localhost:3000/downloadStatus/?id=ae4e2d37-b7e3-4cb5-85a2-ee65e45cebeb
     const { language } = useAppSelector((store) => store.language);
     const [stateEmail, setStateEmail] = useState<string>("");
-
+    const { uuid } = useAppSelector((store) => store.temproryUser);
     const [stateButton, setStateButton] = useState<boolean>(
         isEmail(stateEmail)
     );
@@ -42,7 +41,6 @@ const EmailForm: React.FC<IEmailForm> = ({
         //     patterns,
         // };
         // buyPatterns(data);
-        const idUserTemporary = uuid();
 
         const arrPatterns = patterns.map((item) => Number(item.id));
         createPayment({
@@ -50,7 +48,7 @@ const EmailForm: React.FC<IEmailForm> = ({
             masterClass: arrPatterns,
             email: stateEmail,
             language: language,
-            idUserTemporary: idUserTemporary,
+            idUserTemporary: uuid,
         });
     };
 

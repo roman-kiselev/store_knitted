@@ -30,5 +30,11 @@ export const paymentApi = mainApi.injectEndpoints({
                 },
             }),
         }),
+        checkPayment: build.query<any, { idUser: string }>({
+            query: ({ idUser }) => ({
+                url: `payment/check/?idUser=${idUser}`,
+                method: "GET",
+            }),
+        }),
     }),
 });

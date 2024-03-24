@@ -1,4 +1,4 @@
-import { Button, Modal, Row, Tag } from "antd";
+import { Button, Modal, Row } from "antd";
 import { useAppSelector } from "../../hooks";
 import { IMasterClass } from "../../interface/models/masterClass";
 
@@ -72,11 +72,24 @@ const ModalProducts: React.FC<IModalProductsProps> = ({
                             }}
                             key={item.id}
                         >
-                            <Tag color="cyan" key={item.id}>
+                            <div
+                                style={{
+                                    backgroundColor: "lightcyan",
+                                    padding: "3px",
+                                    border: "1px solid cyan",
+                                    borderRadius: "5px ",
+                                    fontSize: "13px",
+                                }}
+                            >
+                                {language === "ru"
+                                    ? item?.valueRu
+                                    : item?.valueEng}
+                            </div>
+                            {/* <Tag color="cyan" key={item.id}>
                                 {language === "ru"
                                     ? item.valueRu
                                     : item.valueEng}
-                            </Tag>
+                            </Tag> */}
                         </Row>
                     ))}
                 </Row>
