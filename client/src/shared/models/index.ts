@@ -11,6 +11,7 @@ export {
     formReducer,
     formSlice,
     pushParams,
+    resetDataPattern,
 } from "./forms";
 export { languageReducer, languageSlice, setLanguage } from "./language";
 export {

@@ -1,5 +1,6 @@
 import {
     IGetAllMasterClassWithPag,
+    IMasterClass,
     MasterClassViewDto,
 } from "../../interface/models/masterClass";
 import { mainApi } from "../main";
@@ -15,7 +16,7 @@ export const masterClassApi = mainApi.injectEndpoints({
                 method: "GET",
             }),
         }),
-        getOneMasterClass: builder.query<any, { id: string }>({
+        getOneMasterClass: builder.query<IMasterClass, { id: string }>({
             query: ({ id }) => ({
                 url: `master-class/${id}`,
                 method: "GET",

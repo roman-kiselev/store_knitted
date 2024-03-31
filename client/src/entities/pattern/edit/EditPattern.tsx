@@ -1,4 +1,5 @@
-import { useEffect } from "react";
+import { Image } from "antd";
+import React from "react";
 import { masterClassApi } from "../../../shared/api";
 import { TypeFile } from "../../../shared/enums";
 import {
@@ -6,13 +7,13 @@ import {
     useAppSelector,
     useInputFile,
 } from "../../../shared/hooks";
+import { IMasterClass } from "../../../shared/interface";
 import {
     editNameEng,
     editNameRu,
     editPriceEng,
     editPriceRu,
     pushParams,
-    resetDataPattern,
 } from "../../../shared/models";
 import {
     Button,
@@ -25,11 +26,13 @@ import {
 } from "../../../shared/ui";
 import { AddOneImg } from "../../imgEntities";
 
-const FormCreatePattern = () => {
+interface EditPatternProps {
+    dataPattern: IMasterClass;
+}
+
+const EditPattern: React.FC<EditPatternProps> = ({ dataPattern }) => {
     const dispatch = useAppDispatch();
-    useEffect(() => {
-        dispatch(resetDataPattern());
-    }, []);
+
     const [createPatternForm, { data }] =
         masterClassApi.useCreatePatternMutation();
     const { createPattern } = useAppSelector((store) => store.form);
@@ -44,43 +47,32 @@ const FormCreatePattern = () => {
         initialValue: null,
     });
 
-    const handleCreatePattern = () => {
-        const data = {
-            nameRu: createPattern.nameRu,
-            nameEng: createPattern.nameEng,
-            priceRu: createPattern.priceRu,
-            priceEng: createPattern.priceEng,
-            mainImage: mainImageState as File,
-            fileRu: fileRuState,
-            fileEng: fileEngState,
-            params: createPattern.params,
-        };
-
-        createPatternForm(data);
-        // const formData = new FormData();
-        // formData.append("nameRu", createPattern.nameRu);
-        // formData.append("nameEng", createPattern.nameEng);
-        // formData.append("priceRu", createPattern.priceRu.toString());
-        // formData.append("priceEng", createPattern.priceEng.toString());
-        // formData.append("mainImage", mainImageState as File);
-        // formData.append("fileRu", fileRuState as File);
-        // formData.append("fileEng", fileEngState as File);
-        // formData.append("params", JSON.stringify(createPattern.params));
-        // createPatternForm(formData);
-    };
-
     return (
         <Container>
             <Row>
                 <Col m={5} contentWidth="30%">
-                    <AddOneImg
-                        initialValue={mainImageState}
-                        onChange={setMainImageState}
-                    />
+                    {mainImageState ? (
+                        <AddOneImg
+                            initialValue={mainImageState}
+                            onChange={setMainImageState}
+                        />
+                    ) : (
+                        <>
+                            <Image
+                                width={200}
+                                src={`${process.env.REACT_APP_URL_API}/uploads/pattern/${dataPattern.files.mainImg}`}
+                            />
+                            <AddOneImg
+                                initialValue={mainImageState}
+                                onChange={setMainImageState}
+                                viewImage={false}
+                            />
+                        </>
+                    )}
                 </Col>
                 <Col m={5} contentWidth="60%">
                     <Row contentHeight="min-content" m={5}>
-                        <h3>Форма добавления мастер класса</h3>
+                        <h3>Форма редактирования мастер класса</h3>
                     </Row>
                     <Row contentHeight="min-content" m={5}>
                         <Input
@@ -180,7 +172,7 @@ const FormCreatePattern = () => {
                         centerHorizontal
                         centerVertical
                     >
-                        <Button onClick={handleCreatePattern} title="Создать" />
+                        <Button onClick={() => {}} title="Создать" />
                     </Row>
                 </Col>
             </Row>
@@ -188,4 +180,4 @@ const FormCreatePattern = () => {
     );
 };
 
-export default FormCreatePattern;
+export default EditPattern;

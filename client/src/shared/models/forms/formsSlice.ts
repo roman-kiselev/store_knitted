@@ -1,4 +1,5 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
+import { masterClassApi } from "../../api";
 import { IFormsSlice, IParamsPattern } from "../../interface";
 
 const initialState: IFormsSlice = {
@@ -9,6 +10,7 @@ const initialState: IFormsSlice = {
         priceRu: 0,
         priceEng: 0,
     },
+    editPattern: null,
     isError: false,
     isLoading: false,
     message: "",
@@ -66,6 +68,34 @@ export const formSlice = createSlice({
                 });
             }
         },
+        resetDataPattern: (state) => {
+            state.createPattern = {
+                nameEng: "",
+                nameRu: "",
+                params: [],
+                priceRu: 0,
+                priceEng: 0,
+            };
+        },
+    },
+    extraReducers: (builder) => {
+        builder.addMatcher(
+            masterClassApi.endpoints.getOneMasterClass.matchFulfilled,
+            (state, action) => {
+                state.createPattern.nameEng = action.payload.nameEng;
+                state.createPattern.nameRu = action.payload.nameRu;
+                state.createPattern.priceEng = action.payload.priceEng;
+                state.createPattern.priceRu = action.payload.priceRu;
+                const params = action.payload.params.map((item, index) => {
+                    return {
+                        index: index,
+                        nameRu: item.valueRu,
+                        nameEng: item.valueEng,
+                    } as IParamsPattern;
+                });
+                state.createPattern.params = params;
+            }
+        );
     },
 });
 
@@ -77,6 +107,7 @@ export const {
     pushParams,
     editParams,
     delRowParams,
+    resetDataPattern,
 } = formSlice.actions;
 
 export const formReducer = formSlice.reducer;

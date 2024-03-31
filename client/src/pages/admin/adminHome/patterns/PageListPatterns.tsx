@@ -45,7 +45,9 @@ const columns: TableProps<IMasterClassWithKey>["columns"] = [
                 <Link to={`/admin/patterns/list/${record.id}`}>
                     Редактировать
                 </Link>
-                <a>Удалить</a>
+                <Link to={`/admin/patterns/statistics/${record.id}`}>
+                    Статистика
+                </Link>
             </Space>
         ),
     },
