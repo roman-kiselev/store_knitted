@@ -5,6 +5,7 @@ export interface IPayment {
     language: string;
     paymentId: string;
     amount: string;
+    status: string | null;
     createdAt: Date;
     updatedAt: Date;
     deletedAt: null | Date;

@@ -15,6 +15,7 @@ export {
 } from "./forms";
 export { languageReducer, languageSlice, setLanguage } from "./language";
 export {
+    findMasterClass,
     masterClassReducer,
     masterClassSlice,
     setCurrentPage,

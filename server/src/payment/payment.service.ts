@@ -113,6 +113,7 @@ export class PaymentService {
           paymentId: data.id,
           language: dto.language,
           idUserTemporary: dto.idUserTemporary,
+          status: data.status,
         });
 
         paymentId = payment.id.toString();
@@ -144,6 +145,18 @@ export class PaymentService {
         shopId: '262605',
         secretKey: 'test_L2Zo-yZ_vvaxOdBbHo7RxVSzY79uBej6rDQpXz6fcw4',
       });
+      // const updatePayment = await this.paymentRepository.update(
+      //   where: {
+      //     idUserTemporary: dto.idUser;
+      //   },
+      //   {
+      //     status: checkout.getPayment(paymentData.paymentId).status,
+      //   }
+      //s )
+      paymentData.status = (
+        await checkout.getPayment(paymentData.paymentId)
+      ).status;
+      paymentData.save();
 
       if (paymentData) {
         const masterClassId: number[] = paymentData.masterClass.map(

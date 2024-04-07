@@ -1,7 +1,12 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, current } from "@reduxjs/toolkit";
 import { masterClassApi } from "../../api";
 import { IMasterClassSlice } from "../../interface";
 import GetAllMasterClass from "./GetAllMasterClass";
+
+interface IFindAction {
+    name: string;
+    language: string;
+}
 
 const initialState: IMasterClassSlice = {
     masterClass: [],
@@ -19,6 +24,30 @@ export const masterClassSlice = createSlice({
     reducers: {
         setCurrentPage: (state, action) => {
             state.currentPage = action.payload;
+        },
+        findMasterClass: (
+            state,
+            action: { payload: IFindAction; type: string }
+        ) => {
+            console.log(action.payload);
+
+            if (action.payload.language === "ru") {
+                const newArr = current(state.masterClass).filter((item) =>
+                    item.nameRu
+                        .toLowerCase()
+                        .startsWith(action.payload.name.toLowerCase())
+                );
+                console.log(newArr);
+                state.masterClass = newArr;
+            } else if (action.payload.language === "en") {
+                const newArr = current(state.masterClass).filter((item) =>
+                    item.nameEng
+                        .toLowerCase()
+                        .startsWith(action.payload.name.toLowerCase())
+                );
+                console.log(newArr);
+                state.masterClass = newArr;
+            }
         },
     },
     extraReducers: (builder) => {
@@ -38,4 +67,4 @@ export const masterClassSlice = createSlice({
 });
 
 export const masterClassReducer = masterClassSlice.reducer;
-export const { setCurrentPage } = masterClassSlice.actions;
+export const { setCurrentPage, findMasterClass } = masterClassSlice.actions;

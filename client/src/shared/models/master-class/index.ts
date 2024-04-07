@@ -1,4 +1,5 @@
 export {
+    findMasterClass,
     masterClassReducer,
     masterClassSlice,
     setCurrentPage,

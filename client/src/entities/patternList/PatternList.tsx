@@ -7,9 +7,8 @@ import ListCard from "../../shared/ui/card/ListCard";
 
 const PatternList = () => {
     const dispatch = useAppDispatch();
-    const { currentPage, totalCount, pageSize, isLoading } = useAppSelector(
-        (store) => store.masterClass
-    );
+    const { currentPage, totalCount, pageSize, isLoading, masterClass } =
+        useAppSelector((store) => store.masterClass);
     const [stateCurrentPage, setStateCurrentPage] =
         useState<number>(currentPage);
     const { data: allData } = masterClassApi.useGetAllMasterClassQuery(
@@ -33,7 +32,7 @@ const PatternList = () => {
     return (
         <Row style={{ justifyContent: "center", flexDirection: "column" }}>
             <Row style={{ justifyContent: "center" }}>
-                <ListCard arrData={allData?.rows} />
+                <ListCard arrData={masterClass} />
             </Row>
             <Row style={{ justifyContent: "center", marginTop: "20px" }}>
                 <Pagination

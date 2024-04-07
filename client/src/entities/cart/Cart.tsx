@@ -20,6 +20,7 @@ const Cart = () => {
     console.log(dataCart);
     const [buyPatterns, { data: dataPatterns }] =
         masterClassApi.useFormBuyPatternMutation();
+
     const [open, setOpen] = useState(false);
     const [dataOneItem, setDataOneItem] = useState<IMasterClass | null>(null);
     const showModal = (item: IMasterClass) => {

@@ -47,7 +47,12 @@ const Card: React.FC<CardProps> = ({ col, colLg, params, handleShowModal }) => {
         });
     };
 
-    const handleClickView = (params: IMasterClass) => {
+    const handleClickView = (params: IMasterClass, idPattern: number) => {
+        addInCart({
+            idPattern: idPattern,
+            idTempUser: id,
+            idCart: idCart,
+        });
         handleShowModal(params);
         createView({ masterClassId: Number(params.id), userTempId: uuid });
     };
@@ -85,7 +90,7 @@ const Card: React.FC<CardProps> = ({ col, colLg, params, handleShowModal }) => {
                     <Link to="view">
                         <img
                             src={view}
-                            onClick={() => handleClickView(params)}
+                            onClick={() => handleClickView(params, +params.id)}
                             alt="view"
                             className={styles.view}
                         />

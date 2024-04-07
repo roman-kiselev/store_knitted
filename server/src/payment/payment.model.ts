@@ -15,6 +15,7 @@ interface PaymentAttr {
   email: string;
   language: string;
   idUserTemporary: string;
+  status: string;
 }
 
 @Table({ tableName: 'payment', paranoid: true })
@@ -51,6 +52,11 @@ export class Payment extends Model<Payment, PaymentAttr> {
     type: DataType.STRING,
   })
   language: string;
+
+  @Column({
+    type: DataType.STRING,
+  })
+  status: string;
 
   @Column({
     type: DataType.DATE,
