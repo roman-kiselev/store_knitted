@@ -1,52 +1,73 @@
-import { masterClassApi } from "../../api";
-import { ContainerB, RowB } from "../layout";
+import { Row } from "antd";
+import { useState } from "react";
+import { cartApi } from "../../api";
+import { useAppDispatch, useAppSelector } from "../../hooks";
+import { IMasterClass } from "../../interface/models/masterClass";
+import { ModalProducts } from "../modal";
 import Card from "./Card";
 
-const ListCard = () => {
-    const { data } = masterClassApi.useGetAllMasterClassQuery();
+interface IListCardProps {
+    arrData?: IMasterClass[];
+}
 
-    const testArr = [];
-    for (let i = 0; i < 6; i++) {
-        if (data) {
-            testArr.push(data[1]);
+const ListCard: React.FC<IListCardProps> = ({ arrData }) => {
+    const dispatch = useAppDispatch();
+
+    const { language } = useAppSelector((store) => store.language);
+    const { id, uuid } = useAppSelector((store) => store.temproryUser);
+    const { idCart } = useAppSelector((store) => store.cart);
+    const [addInCart, { data: dataPatterns }] =
+        cartApi.useAddPatternInCartMutation();
+    const [open, setOpen] = useState(false);
+    const [dataOneItem, setDataOneItem] = useState<IMasterClass | null>(null);
+
+    const showModal = (params: IMasterClass) => {
+        setDataOneItem(params);
+        setOpen(true);
+    };
+
+    const handleOk = () => {
+        if (dataOneItem !== null) {
+            // dispatch(addMasterClass(dataOneItem));
+            addInCart({
+                idPattern: +dataOneItem.id,
+                idTempUser: id,
+                idCart: idCart,
+            });
         }
-    }
+
+        setOpen(false);
+    };
+
+    const handleCancel = () => {
+        setOpen(false);
+    };
 
     return (
-        <ContainerB>
-            <RowB>
-                {testArr?.map((item, index) => (
-                    <Card
-                        params={item}
-                        key={index}
-                        col="col-3"
-                        colLg="col-lg-12"
-                    />
-                ))}
-                {/* <Card col="col-3" colLg="col-lg-12" />
-                <Card col="col-3" />
-                <Card col="col-3" />
-                <Card col="col-3" />
-                <Card col="col-3" />
-                <Card col="col-3" />
-                <Card col="col-3" />
-                <Card col="col-3" /> */}
-            </RowB>
-        </ContainerB>
-
-        // <Container contentWidth="70%" wrap flexBasis="100%">
-        //     <Card />
-        //     <Card />
-        //     <Card />
-        //     <Card />
-        //     <Card />
-        //     <Card />
-        //     <Card />
-        //     <Card />
-        //     {/* <div className={styles.listCardContainer}>
-
-        //     </div> */}
-        // </Container>
+        <>
+            <ModalProducts
+                dataOneItem={dataOneItem}
+                open={open}
+                handleOk={handleOk}
+                handleCancel={handleCancel}
+            />
+            <Row style={{ justifyContent: "center" }}>
+                <Row
+                    gutter={[40, 40]}
+                    style={{ maxWidth: "1080px", justifyContent: "center" }}
+                >
+                    {arrData?.map((item, index) => (
+                        <Card
+                            handleShowModal={showModal}
+                            params={item}
+                            key={index}
+                            // col="col-3"
+                            // colLg="col-lg-12"
+                        />
+                    ))}
+                </Row>
+            </Row>
+        </>
     );
 };
 

@@ -1,11 +1,25 @@
-import { IMasterClass } from "../../interface/models/masterClass";
+import {
+    IFindMasterClassDto,
+    IGetAllMasterClassWithPag,
+    IMasterClass,
+    MasterClassViewDto,
+} from "../../interface/models/masterClass";
 import { mainApi } from "../main";
 
 export const masterClassApi = mainApi.injectEndpoints({
     endpoints: (builder) => ({
-        getAllMasterClass: builder.query<IMasterClass[], void>({
-            query: () => ({
-                url: "master-class",
+        getAllMasterClass: builder.query<
+            IGetAllMasterClassWithPag,
+            { page: string; limit: string; offset: string }
+        >({
+            query: ({ limit, page, offset }) => ({
+                url: `master-class/?page=${page}&limit=${limit}&offset=${offset}`,
+                method: "GET",
+            }),
+        }),
+        getOneMasterClass: builder.query<IMasterClass, { id: string }>({
+            query: ({ id }) => ({
+                url: `master-class/${id}`,
                 method: "GET",
             }),
         }),
@@ -20,13 +34,38 @@ export const masterClassApi = mainApi.injectEndpoints({
                 formData.append("fileRu", data.fileRu as File);
                 formData.append("fileEng", data.fileEng as File);
                 formData.append("params", JSON.stringify(data.params));
-                console.log(data);
+
                 return {
                     url: "master-class",
                     method: "POST",
                     body: formData,
                 };
             },
+        }),
+
+        formBuyPattern: builder.mutation({
+            query: (data) => ({
+                url: "master-class/buy-pattern",
+                method: "POST",
+                body: data,
+            }),
+        }),
+
+        viewPattern: builder.mutation<void, MasterClassViewDto>({
+            query: (data) => ({
+                url: "master-class/view-pattern",
+                method: "POST",
+                body: data,
+            }),
+        }),
+        findNamePlusGetAll: builder.query<
+            IGetAllMasterClassWithPag,
+            IFindMasterClassDto
+        >({
+            query: ({ name, limit, offset, page }) => ({
+                url: `master-class/find/?name=${name}&limit=${limit}&offset=${offset}&page=${page}`,
+                method: "GET",
+            }),
         }),
     }),
 });

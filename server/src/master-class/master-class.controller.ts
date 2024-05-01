@@ -4,6 +4,7 @@ import {
   Get,
   Param,
   Post,
+  Query,
   UploadedFiles,
   UseGuards,
   UseInterceptors,
@@ -12,6 +13,8 @@ import { FileFieldsInterceptor } from '@nestjs/platform-express';
 import { Role } from 'src/auth/role-auth.decorator';
 import { RoleGuard } from 'src/auth/roles.guard';
 import { CreateMasterClassDto } from './dto/create-master-class.dto';
+import { MasterClassViewDto } from './dto/create-view-master-class.dto';
+import { FormMasterClass } from './dto/form-master-class.dto';
 import { IFiles } from './interfaces/IFiles';
 import { MasterClassService } from './master-class.service';
 
@@ -22,8 +25,31 @@ export class MasterClassController {
   // @Role('admin')
   // @UseGuards(RoleGuard)
   @Get('/')
-  getAllMasterClass() {
-    return this.masterClassService.getAllMasterClass();
+  getAllMasterClass(
+    @Query('page') page: string,
+    @Query('offset') offset: string,
+    @Query('limit') limit: string,
+  ) {
+    return this.masterClassService.getAllMasterClass({
+      currentPage: +page,
+      offset: +offset,
+      limit: +limit,
+    });
+  }
+
+  @Get('/find')
+  getAllMasterClassByName(
+    @Query('name') name: string,
+    @Query('page') page: string,
+    @Query('offset') offset: string,
+    @Query('limit') limit: string,
+  ) {
+    return this.masterClassService.getAllMasterClassByName({
+      limit,
+      offset,
+      page,
+      name,
+    });
   }
 
   @Role('admin')
@@ -33,8 +59,8 @@ export class MasterClassController {
     return this.masterClassService.getOneMasterClassById(id);
   }
 
-  // @Role('admin')
-  // @UseGuards(RoleGuard)
+  @Role('admin')
+  @UseGuards(RoleGuard)
   @Post('/')
   @UseInterceptors(
     FileFieldsInterceptor([
@@ -49,5 +75,15 @@ export class MasterClassController {
     @Body() dto: CreateMasterClassDto,
   ) {
     return this.masterClassService.create(dto, files);
+  }
+
+  @Post('/buy-pattern')
+  formBuyPattern(@Body() dto: FormMasterClass) {
+    return this.masterClassService.formPatternsAndSendEmail(dto);
+  }
+
+  @Post('/view-pattern')
+  viewPattern(@Body() dto: MasterClassViewDto) {
+    return this.masterClassService.viewPattern(dto);
   }
 }

@@ -1,5 +1,5 @@
 @hostJob = http://192.168.3.16:7000
-@hostHome = http://192.168.1.14:7000
+@hostHome = http://192.168.1.15:7000
 
 @host = {{hostHome}}
 
@@ -89,6 +89,8 @@ Authorization: Bearer {{token}}
 
 
 
+
+
 ### ------ Параметры мастер класса---------------------------------------
 ### Get All Value 
 GET {{host}}/value-parameter HTTP/1.1
@@ -116,9 +118,12 @@ Authorization: Bearer {{token}}
 
 ### ------ Создание мастер класса---------------------------------------
 ### Get All Value 
-GET {{host}}/master-class HTTP/1.1
+GET {{host}}/master-class/?page=1&limit=0&offset=1 HTTP/1.1
 Authorization: Bearer {{token}}
 ####
+
+### Поиск
+GET {{host}}/master-class/find/?name=&page=1&limit=6&offset=6 HTTP/1.1
 
 ### Get MasterClass by Id 
 GET {{host}}/master-class/1 HTTP/1.1
@@ -147,3 +152,40 @@ Content-type: application/json; charset=utf-8
     "masterClass": [1, 2]
 }
 ###
+
+### ------- Payments Check -------------
+
+GET {{host}}/payment/check/?idUser=ce4c7ed4-e901-47e9-bbc7-f7951a5b1004 HTTP/1.1
+
+
+###
+
+
+
+### Get MasterClass by Id 
+GET {{host}}/mail/test HTTP/1.1
+
+
+### Проверить и создать пользователя и корзину
+GET {{host}}/temp-user/?id=1daf-sdfaf-sdfsdf-s5fsf HTTP/1.1
+
+####
+
+
+### Получить корзину
+GET {{host}}/cart/13 HTTP/1.1
+
+####  Добавление мастер класса в  корзину
+POST {{host}}/cart/addPattern HTTP/1.1
+Content-type: application/json; charset=utf-8
+
+{
+    "idCart": 13,
+    "idTempUser": 13,
+    "idPattern": 6
+}
+
+### Удалить
+DELETE {{host}}/cart/deletePattern/2 HTTP/1.1
+
+####

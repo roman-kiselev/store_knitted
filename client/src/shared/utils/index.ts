@@ -1,3 +1,2 @@
-import { CheckAuth } from "./check";
-
-export { CheckAuth };
+export { CheckAuth, CheckTemporaryUser } from "./check";
+export { getSumTotal } from "./helpers";

@@ -1,5 +1,12 @@
+import { Row } from "antd";
+import ListCard from "../../../shared/ui/card/ListCard";
+
 const Featured = () => {
-    return <div>Featured</div>;
+    return (
+        <Row style={{ justifyContent: "center" }}>
+            <ListCard />
+        </Row>
+    );
 };
 
 export default Featured;

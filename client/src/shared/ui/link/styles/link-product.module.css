@@ -1,0 +1,32 @@
+@import url("https://fonts.googleapis.com/css2?family=Balsamiq+Sans:wght@400;700&family=Bellota:wght@300;400;700&family=Comfortaa:wght@300;400;500;600&family=Shantell+Sans:ital,wght@0,300;0,400;0,500;0,700;1,400&display=swap");
+
+.linkContainer {
+    display: flex;
+    margin: 0 30px 0 30px;
+}
+
+.link {
+    text-decoration: none;
+    color: black;
+    font-size: 1.12em;
+    font-weight: 700;
+    display: flex;
+    font-family: "Bellota";
+    line-height: 1.2;
+}
+
+.link:hover {
+    color: #ffa247;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.active {
+    color: #ffa247;
+}
+
+@media (max-width: 1080px) {
+    .link {
+        font-size: 0.8em;
+    }
+}

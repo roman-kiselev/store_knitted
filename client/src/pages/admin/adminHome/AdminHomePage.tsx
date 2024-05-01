@@ -16,6 +16,10 @@ const AdminHomePage = () => {
                                 path="/admin/patterns/list"
                                 titleLink="Список"
                             />
+                            <ItemChild
+                                path="/admin/patterns/statistics"
+                                titleLink="Статистика"
+                            />
                         </Item>
                         <Item title="Товары">
                             <ItemChild
@@ -26,6 +30,16 @@ const AdminHomePage = () => {
                                 path="/admin/products/list"
                                 titleLink="Список"
                             />
+                        </Item>
+                        <Item title="Слайды">
+                            <ItemChild
+                                path="/admin/slides/createSlide"
+                                titleLink="Создать"
+                            />
+                            {/* <ItemChild
+                                path="/admin/products/list"
+                                titleLink="Список"
+                            /> */}
                         </Item>
                     </LeftMenu>
                 </div>

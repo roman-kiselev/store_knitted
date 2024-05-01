@@ -18,28 +18,28 @@ const Header = () => {
                 <NavContainer>
                     <Logo />
                     <Menu>
+                        {/* <LinkNav
+                            path="/bestsellers"
+                            title={language === "en" ? "Home" : "Главная"}
+                        /> */}
                         <LinkNav
                             path="/"
-                            title={language === "en" ? "Home" : "Главная"}
-                        />
-                        <LinkNav
-                            path="/cart"
                             title={
                                 language === "en" ? "Patterns" : "Мастер класс"
                             }
                         />
-                        <LinkNav
-                            path="/about"
+                        {/* <LinkNav
+                            path="/toys"
                             title={language === "en" ? "Toys" : "Игрушки"}
-                        />
-                        <LinkNav
+                        /> */}
+                        {/* <LinkNav
                             path="/contact"
                             title={language === "en" ? "Contact" : "Контакты"}
                         />
                         <LinkNav
                             path="/about"
                             title={language === "en" ? "About us" : "О нас"}
-                        />
+                        /> */}
                         {isAuth && (
                             <LinkNav
                                 path="/admin"

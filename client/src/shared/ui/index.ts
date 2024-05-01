@@ -1,7 +1,8 @@
-import { Button } from "./button";
-import { OneImage } from "./imageUi";
-import { Input, InputFile, InputNumber } from "./input";
-import {
+export { Button } from "./button";
+export { H } from "./header";
+export { OneImage } from "./imageUi";
+export { Input, InputFile, InputNumber, InputRuEng } from "./input";
+export {
     Col,
     Container,
     Footer,
@@ -11,29 +12,8 @@ import {
     Layout,
     Row,
 } from "./layout";
-import { LinkNav } from "./link";
-import { Item, ItemChild, LeftMenu } from "./menu";
-import { Select } from "./select";
-import { Spin } from "./spin";
-
-export {
-    Button,
-    Col,
-    Container,
-    Footer,
-    Header,
-    HeaderConteinerBottom,
-    HeaderTop,
-    Input,
-    InputFile,
-    InputNumber,
-    Item,
-    ItemChild,
-    Layout,
-    LeftMenu,
-    LinkNav,
-    OneImage,
-    Row,
-    Select,
-    Spin,
-};
+export { LinkNav, LinkProduct } from "./link";
+export { Item, ItemChild, LeftMenu } from "./menu";
+export { ModalProducts } from "./modal";
+export { Select } from "./select";
+export { Spin } from "./spin";

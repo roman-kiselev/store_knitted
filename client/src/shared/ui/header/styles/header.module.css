@@ -1,0 +1,7 @@
+.header {
+    display: flex;
+    font-family: "Shantell Sans", cursive;
+    font-size: 24px;
+    color: rgb(255, 79, 163);
+    line-height: 1.2;
+}

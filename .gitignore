@@ -1,4 +1,8 @@
 .idea
+<<<<<<< HEAD
+=======
+.vscode
+>>>>>>> ant-grid
 client/node_modules
 client/*.env
 server/node_modules

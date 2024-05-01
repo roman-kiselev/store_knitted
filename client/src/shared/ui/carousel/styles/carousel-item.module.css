@@ -95,8 +95,11 @@
 }
 
 @media (max-width: 500px) {
-    .carouselItemContainer {
-        height: 40vh;
-        width: 90%;
+    .containerBanner {
+        width: 50%;
+        height: 50%;
+    }
+    .headerBanner {
+        font-size: 1.5em;
     }
 }

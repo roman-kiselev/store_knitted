@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { masterClassApi } from "../../../shared/api";
 import { TypeFile } from "../../../shared/enums";
 import {
@@ -11,6 +12,7 @@ import {
     editPriceEng,
     editPriceRu,
     pushParams,
+    resetDataPattern,
 } from "../../../shared/models";
 import {
     Button,
@@ -18,13 +20,16 @@ import {
     Container,
     Input,
     InputFile,
+    InputRuEng,
     Row,
 } from "../../../shared/ui";
 import { AddOneImg } from "../../imgEntities";
-import InputRuEng from "./InputRuEng";
 
 const FormCreatePattern = () => {
     const dispatch = useAppDispatch();
+    useEffect(() => {
+        dispatch(resetDataPattern());
+    }, []);
     const [createPatternForm, { data }] =
         masterClassApi.useCreatePatternMutation();
     const { createPattern } = useAppSelector((store) => store.form);
@@ -50,7 +55,7 @@ const FormCreatePattern = () => {
             fileEng: fileEngState,
             params: createPattern.params,
         };
-        console.log(data);
+
         createPatternForm(data);
         // const formData = new FormData();
         // formData.append("nameRu", createPattern.nameRu);

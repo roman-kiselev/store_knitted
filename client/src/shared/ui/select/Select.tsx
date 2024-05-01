@@ -11,7 +11,6 @@ const Select: React.FC<ISelectProps> = ({ onChange, options, value }) => {
     // const handleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     //     onChange(e.target.value);
     // };
-    console.log(value);
 
     return (
         <select className={styles.select} value={value} onChange={onChange}>
