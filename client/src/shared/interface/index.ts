@@ -8,6 +8,7 @@ export type {
     ICreatePattern,
     ICurrencySlice,
     IFilesMasterClass,
+    IFindMasterClassDto,
     IFormsSlice,
     IGetAllMasterClassWithPag,
     ILanguageSlice,

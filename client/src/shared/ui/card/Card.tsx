@@ -35,11 +35,7 @@ const Card: React.FC<CardProps> = ({ col, colLg, params, handleShowModal }) => {
         // if (oneMasterClass) {
         //     // dispatch(addMasterClass(oneMasterClass));
         // }
-        console.log({
-            idPattern: idPattern,
-            idTempUser: id,
-            idCart: idCart,
-        });
+
         addInCart({
             idPattern: idPattern,
             idTempUser: id,
@@ -48,11 +44,11 @@ const Card: React.FC<CardProps> = ({ col, colLg, params, handleShowModal }) => {
     };
 
     const handleClickView = (params: IMasterClass, idPattern: number) => {
-        addInCart({
-            idPattern: idPattern,
-            idTempUser: id,
-            idCart: idCart,
-        });
+        // addInCart({
+        //     idPattern: idPattern,
+        //     idTempUser: id,
+        //     idCart: idCart,
+        // });
         handleShowModal(params);
         createView({ masterClassId: Number(params.id), userTempId: uuid });
     };
@@ -61,11 +57,11 @@ const Card: React.FC<CardProps> = ({ col, colLg, params, handleShowModal }) => {
         // <div className={styles.containerOneCard}>
         <Col
             style={{ display: "flex", justifyContent: "center" }}
-            span={7}
-            xs={10}
-            sm={12}
-            md={8}
-            lg={7}
+            //span={7}
+            //  xs={10}
+            // sm={12}
+            // md={8}
+            // ={7}
         >
             <div className={styles.Rounded_Rectangle_56}>
                 <div className={styles.Rounded_Rectangle_57}>

@@ -18,12 +18,12 @@ const Header = () => {
                 <NavContainer>
                     <Logo />
                     <Menu>
-                        <LinkNav
+                        {/* <LinkNav
                             path="/bestsellers"
                             title={language === "en" ? "Home" : "Главная"}
-                        />
+                        /> */}
                         <LinkNav
-                            path="/patterns"
+                            path="/"
                             title={
                                 language === "en" ? "Patterns" : "Мастер класс"
                             }
@@ -32,14 +32,14 @@ const Header = () => {
                             path="/toys"
                             title={language === "en" ? "Toys" : "Игрушки"}
                         /> */}
-                        <LinkNav
+                        {/* <LinkNav
                             path="/contact"
                             title={language === "en" ? "Contact" : "Контакты"}
                         />
                         <LinkNav
                             path="/about"
                             title={language === "en" ? "About us" : "О нас"}
-                        />
+                        /> */}
                         {isAuth && (
                             <LinkNav
                                 path="/admin"

@@ -1,11 +1,13 @@
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/sequelize';
 import { Op } from 'sequelize';
+import { DatabaseService } from 'src/database/database.service';
 import { FilesMasterClass } from 'src/files-master-class/files-master-class.model';
 import { FilesService } from 'src/files/files.service';
 import { PatternParams } from 'src/pattern-params/pattern-params.model';
 import { CreateMasterClassDto } from './dto/create-master-class.dto';
 import { MasterClassViewDto } from './dto/create-view-master-class.dto';
+import { FindMasterClassDto } from './dto/find-master-class.dto';
 import { FormMasterClass } from './dto/form-master-class.dto';
 import { IFiles } from './interfaces/IFiles';
 import { IGetAllWithPagination } from './interfaces/IGetAllWithPagination';
@@ -23,6 +25,7 @@ export class MasterClassService {
     @InjectModel(MasterClassView)
     private masterClassViewRepository: typeof MasterClassView,
     private filesService: FilesService,
+    private databaseService: DatabaseService,
   ) {}
 
   // Создаём мастер класс
@@ -178,6 +181,77 @@ export class MasterClassService {
         masterClassId: masterClass.id,
       });
       return viewMasterClass;
+    } catch (e) {
+      if (e instanceof HttpException) {
+        throw e;
+      }
+      throw new HttpException(e.message, HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+  }
+
+  async getAllMasterClassByName(dto: FindMasterClassDto) {
+    console.log(dto);
+    try {
+      const currentOffset =
+        Number(dto.page) * Number(dto.offset) - Number(dto.offset);
+      const replacements = {
+        name: dto.name,
+        limit: Number(dto.limit) === 0 ? 6 : Number(dto.limit),
+        offset: currentOffset,
+      };
+      const query = `
+      SELECT * FROM store.\`master-class\`
+      where nameRu LIKE CONCAT('%',:name,'%') OR nameEng LIKE CONCAT('%',:name,'%')
+      limit :limit
+      offset :offset;
+      `;
+
+      // const test = await this.databaseService.executeQuery(query, replacements);
+      // const count = await this.masterClassRepository.count();
+      const dataCount = await this.masterClassRepository.findAll({
+        where: {
+          [Op.or]: {
+            nameRu: {
+              [Op.like]: `%${dto.name}%`,
+            },
+            nameEng: {
+              [Op.like]: `%${dto.name}%`,
+            },
+          },
+        },
+        include: [
+          {
+            model: PatternParams,
+          },
+          {
+            model: FilesMasterClass,
+          },
+        ],
+      });
+      const data = await this.masterClassRepository.findAll({
+        where: {
+          [Op.or]: {
+            nameRu: {
+              [Op.like]: `%${dto.name}%`,
+            },
+            nameEng: {
+              [Op.like]: `%${dto.name}%`,
+            },
+          },
+        },
+        include: [
+          {
+            model: PatternParams,
+          },
+          {
+            model: FilesMasterClass,
+          },
+        ],
+        limit: replacements.limit,
+        offset: replacements.offset,
+      });
+
+      return { count: dataCount.length, rows: data };
     } catch (e) {
       if (e instanceof HttpException) {
         throw e;

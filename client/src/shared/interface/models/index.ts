@@ -16,6 +16,7 @@ export type {
 export type { ILanguageSlice } from "./language";
 export type {
     IFilesMasterClass,
+    IFindMasterClassDto,
     IGetAllMasterClassWithPag,
     IMasterClass,
     IMasterClassForCart,

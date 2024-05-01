@@ -1,4 +1,5 @@
 import {
+    IFindMasterClassDto,
     IGetAllMasterClassWithPag,
     IMasterClass,
     MasterClassViewDto,
@@ -55,6 +56,15 @@ export const masterClassApi = mainApi.injectEndpoints({
                 url: "master-class/view-pattern",
                 method: "POST",
                 body: data,
+            }),
+        }),
+        findNamePlusGetAll: builder.query<
+            IGetAllMasterClassWithPag,
+            IFindMasterClassDto
+        >({
+            query: ({ name, limit, offset, page }) => ({
+                url: `master-class/find/?name=${name}&limit=${limit}&offset=${offset}&page=${page}`,
+                method: "GET",
             }),
         }),
     }),

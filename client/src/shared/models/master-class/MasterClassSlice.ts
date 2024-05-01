@@ -1,6 +1,7 @@
 import { createSlice, current } from "@reduxjs/toolkit";
 import { masterClassApi } from "../../api";
 import { IMasterClassSlice } from "../../interface";
+import FindNamePlusGetAll from "./FindNamePlusGetAll";
 import GetAllMasterClass from "./GetAllMasterClass";
 
 interface IFindAction {
@@ -12,7 +13,7 @@ const initialState: IMasterClassSlice = {
     masterClass: [],
     currentPage: 1,
     totalCount: 0,
-    pageSize: 1,
+    pageSize: 6,
     isLoading: false,
     isError: false,
     message: "",
@@ -29,15 +30,13 @@ export const masterClassSlice = createSlice({
             state,
             action: { payload: IFindAction; type: string }
         ) => {
-            console.log(action.payload);
-
             if (action.payload.language === "ru") {
                 const newArr = current(state.masterClass).filter((item) =>
                     item.nameRu
                         .toLowerCase()
                         .startsWith(action.payload.name.toLowerCase())
                 );
-                console.log(newArr);
+
                 state.masterClass = newArr;
             } else if (action.payload.language === "en") {
                 const newArr = current(state.masterClass).filter((item) =>
@@ -45,7 +44,7 @@ export const masterClassSlice = createSlice({
                         .toLowerCase()
                         .startsWith(action.payload.name.toLowerCase())
                 );
-                console.log(newArr);
+
                 state.masterClass = newArr;
             }
         },
@@ -62,6 +61,20 @@ export const masterClassSlice = createSlice({
         builder.addMatcher(
             masterClassApi.endpoints.getAllMasterClass.matchRejected,
             GetAllMasterClass.rejected
+        );
+
+        // Поиск
+        builder.addMatcher(
+            masterClassApi.endpoints.findNamePlusGetAll.matchPending,
+            FindNamePlusGetAll.pending
+        );
+        builder.addMatcher(
+            masterClassApi.endpoints.findNamePlusGetAll.matchFulfilled,
+            FindNamePlusGetAll.fulfilled
+        );
+        builder.addMatcher(
+            masterClassApi.endpoints.findNamePlusGetAll.matchRejected,
+            FindNamePlusGetAll.rejected
         );
     },
 });

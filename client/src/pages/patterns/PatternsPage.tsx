@@ -1,18 +1,30 @@
 import { Col, Input, Row } from "antd";
 import { useState } from "react";
 import { PatternList } from "../../entities";
+import { masterClassApi } from "../../shared/api";
 import { useAppDispatch, useAppSelector } from "../../shared/hooks";
 import { findMasterClass } from "../../shared/models";
+import MyFloatButton from "../../shared/ui/layout/MyFloatButton";
 
 const PatternsPage = () => {
     const dispatch = useAppDispatch();
     const { language } = useAppSelector((store) => store.language);
+    const { currentPage, totalCount, pageSize, isLoading, masterClass } =
+        useAppSelector((store) => store.masterClass);
     const [findState, setFindState] = useState("");
 
     const handleFind = (value: string) => {
         setFindState(value);
         dispatch(findMasterClass({ language, name: findState }));
     };
+
+    const { data: masterClassData, isLoading: masterClassLoading } =
+        masterClassApi.useFindNamePlusGetAllQuery({
+            limit: pageSize,
+            name: findState,
+            offset: pageSize,
+            page: currentPage,
+        });
 
     return (
         <Row style={{ justifyContent: "center", flexDirection: "column" }}>
@@ -42,6 +54,7 @@ const PatternsPage = () => {
                 </Col>
             </Row>
             <PatternList />
+            <MyFloatButton />
         </Row>
     );
 };

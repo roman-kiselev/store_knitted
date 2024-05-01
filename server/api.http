@@ -122,6 +122,9 @@ GET {{host}}/master-class/?page=1&limit=0&offset=1 HTTP/1.1
 Authorization: Bearer {{token}}
 ####
 
+### Поиск
+GET {{host}}/master-class/find/?name=&page=1&limit=6&offset=6 HTTP/1.1
+
 ### Get MasterClass by Id 
 GET {{host}}/master-class/1 HTTP/1.1
 Authorization: Bearer {{token}}

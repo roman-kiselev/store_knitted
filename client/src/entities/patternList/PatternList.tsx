@@ -1,6 +1,5 @@
 import { Pagination, Row, Spin } from "antd";
 import { useState } from "react";
-import { masterClassApi } from "../../shared/api";
 import { useAppDispatch, useAppSelector } from "../../shared/hooks";
 import { setCurrentPage } from "../../shared/models";
 import ListCard from "../../shared/ui/card/ListCard";
@@ -11,16 +10,17 @@ const PatternList = () => {
         useAppSelector((store) => store.masterClass);
     const [stateCurrentPage, setStateCurrentPage] =
         useState<number>(currentPage);
-    const { data: allData } = masterClassApi.useGetAllMasterClassQuery(
-        {
-            page: stateCurrentPage.toString(),
-            limit: "6",
-            offset: pageSize.toString(),
-        },
-        {
-            refetchOnMountOrArgChange: true,
-        }
-    );
+    // const { data: allData } = masterClassApi.useFindNamePlusGetAllQuery(
+    //     {
+    //         page: stateCurrentPage.toString(),
+    //         limit: "6",
+    //         offset: pageSize.toString(),
+    //         name: "",
+    //     },
+    //     {
+    //         refetchOnMountOrArgChange: true,
+    //     }
+    // );
 
     if (isLoading) {
         return <Spin size="large" />;
@@ -29,6 +29,7 @@ const PatternList = () => {
         dispatch(setCurrentPage(page));
         setStateCurrentPage(page);
     };
+
     return (
         <Row style={{ justifyContent: "center", flexDirection: "column" }}>
             <Row style={{ justifyContent: "center" }}>
@@ -36,10 +37,11 @@ const PatternList = () => {
             </Row>
             <Row style={{ justifyContent: "center", marginTop: "20px" }}>
                 <Pagination
-                    defaultPageSize={6}
+                    // defaultPageSize={6}
                     defaultCurrent={currentPage}
                     total={totalCount}
                     onChange={handleChange}
+                    pageSize={pageSize}
                 />
             </Row>
         </Row>

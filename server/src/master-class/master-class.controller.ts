@@ -37,6 +37,21 @@ export class MasterClassController {
     });
   }
 
+  @Get('/find')
+  getAllMasterClassByName(
+    @Query('name') name: string,
+    @Query('page') page: string,
+    @Query('offset') offset: string,
+    @Query('limit') limit: string,
+  ) {
+    return this.masterClassService.getAllMasterClassByName({
+      limit,
+      offset,
+      page,
+      name,
+    });
+  }
+
   @Role('admin')
   @UseGuards(RoleGuard)
   @Get('/:id')

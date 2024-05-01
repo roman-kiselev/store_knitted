@@ -4,7 +4,7 @@ import { Route, Routes } from "react-router";
 import { CheckAuth, CheckTemporaryUser } from "../shared/utils";
 import LoginPage from "./admin/auth/LoginPage";
 import DownloadStatus from "./downloadPattern/DownloadStatus";
-import { HomePage, LayoutPage } from "./home";
+import { LayoutPage } from "./home";
 import PatternsPage from "./patterns/PatternsPage";
 
 const AdminRouter = lazy(() => import("./admin"));
@@ -14,16 +14,16 @@ const Routing = () => {
     return (
         <Routes>
             <Route element={<LayoutPage />}>
-                <Route
+                {/* <Route
                     path="/*"
                     element={
                         <CheckTemporaryUser>
                             <HomePage />
                         </CheckTemporaryUser>
                     }
-                />
+                /> */}
                 <Route
-                    path="/patterns/*"
+                    path="/*"
                     element={
                         <CheckTemporaryUser>
                             <PatternsPage />

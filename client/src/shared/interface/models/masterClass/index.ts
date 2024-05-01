@@ -1,4 +1,5 @@
 export type { IFilesMasterClass } from "./IFilesMasterClass";
+export type { IFindMasterClassDto } from "./IFindMasterClassDto";
 export type { IGetAllMasterClassWithPag } from "./IGetAllMasterClassWithPag";
 export type { IMasterClass } from "./IMasterClass";
 export type { IMasterClassForCart } from "./IMasterClassForCart";
