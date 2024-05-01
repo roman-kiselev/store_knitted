@@ -10,7 +10,7 @@
 
 @media (max-width: 1080px) {
     .containerBottom {
-        height: 3vh;
+        height: 5vh;
         max-height: 50px;
     }
 }

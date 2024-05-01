@@ -2,8 +2,12 @@ import { Col } from "antd";
 import { Link } from "react-router-dom";
 import { cartApi, masterClassApi } from "../../api";
 import { useAppDispatch, useAppSelector } from "../../hooks";
-import { IMasterClass } from "../../interface/models/masterClass";
+import {
+    IMasterClass,
+    IMasterClassForCart,
+} from "../../interface/models/masterClass";
 import cart from "./image/Cart.png";
+import isCart from "./image/IsCart.png";
 import view from "./image/view.png";
 import styles from "./styles/card.module.css";
 
@@ -20,10 +24,14 @@ interface CardProps {
     handleShowModal: (params: IMasterClass) => void;
 }
 
+const isInCart = (listPatterns: IMasterClassForCart[], idPattern: number) => {
+    return listPatterns.some((item) => +item.id === idPattern);
+};
+
 const Card: React.FC<CardProps> = ({ col, colLg, params, handleShowModal }) => {
     const dispatch = useAppDispatch();
     const { id, uuid } = useAppSelector((store) => store.temproryUser);
-    const { idCart } = useAppSelector((store) => store.cart);
+    const { idCart, patterns } = useAppSelector((store) => store.cart);
     const { masterClass } = useAppSelector((store) => store.masterClass);
     const [createView, { data }] = masterClassApi.useViewPatternMutation();
     const { language } = useAppSelector((store) => store.language);
@@ -77,7 +85,7 @@ const Card: React.FC<CardProps> = ({ col, colLg, params, handleShowModal }) => {
                 <div className={styles.containerIcons}>
                     <Link to="cartLink">
                         <img
-                            src={cart}
+                            src={isInCart(patterns, +params.id) ? isCart : cart}
                             onClick={() => handleClickCart(+params.id)}
                             alt="cart"
                             className={styles.cart}

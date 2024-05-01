@@ -45,9 +45,9 @@
         display: flex;
         position: fixed;
         top: 0;
-        left: 0;
+        left: -40px;
         z-index: 1000;
-        margin-top: 30vh;
+        margin-top: 15vh;
         width: 100%;
         max-width: 320px;
         /* margin-left: 16%; */
