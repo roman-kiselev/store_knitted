@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import { v4 as uuid } from "uuid";
-import { tempUserApi } from "../../api";
+import { cartApi, tempUserApi } from "../../api";
+import { useAppSelector } from "../../hooks";
 interface ICheckTemporaryUser {
     children: JSX.Element;
 }
@@ -29,6 +30,12 @@ const CheckTemporaryUser: React.FC<ICheckTemporaryUser> = ({ children }) => {
     const { data, isSuccess } = tempUserApi.useCheckTemporaryUserQuery({
         uuid: id as string,
     });
+    const { id: idCart } = useAppSelector((store) => store.temproryUser);
+
+    const { data: dataPatterns } = cartApi.useGetCartByIdQuery(
+        { idCart },
+        { skip: !idCart }
+    );
 
     //userId:"57a8b6d2-1a80-4d05-98e4-b4ceb73170d8"
     useEffect(() => {

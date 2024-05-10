@@ -11,9 +11,10 @@ interface IStatusSendPattern {
 const StatusSendPattern: React.FC<IStatusSendPattern> = () => {
     const { id, uuid } = useAppSelector((store) => store.temproryUser);
     const { email, isLoading } = useAppSelector((store) => store.payment);
-    const { data } = paymentApi.useCheckPaymentQuery({ idUser: uuid });
+    const { data, isLoading: isLoadingPayment } =
+        paymentApi.useCheckPaymentQuery({ idUser: uuid });
     console.log(data);
-    if (isLoading) {
+    if (isLoading || isLoadingPayment) {
         return (
             <div style={{ display: "flex", justifyContent: "center" }}>
                 <Spin size="large" />
@@ -40,7 +41,7 @@ const StatusSendPattern: React.FC<IStatusSendPattern> = () => {
                 <Result
                     status="warning"
                     title="Не удалось отправить мастер-класс"
-                    subTitle="Почта: JpVJd@example.com"
+                    subTitle={`Почта: ${email}`}
                     extra={
                         <Button type="primary" key="console">
                             Повторить отправку

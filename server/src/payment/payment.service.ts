@@ -158,17 +158,20 @@ export class PaymentService {
       ).status;
       paymentData.save();
 
-      if (paymentData) {
+      if (paymentData.status === 'succeeded') {
         const masterClassId: number[] = paymentData.masterClass.map(
           (item) => item.id,
         );
         const payment = await checkout.getPayment(paymentData.paymentId);
         const copyPayment = JSON.parse(JSON.stringify(payment));
-        await this.sendPatterns({
-          email: paymentData.email,
-          masterClassId: masterClassId,
-          language: paymentData.language,
-        });
+        // await this.sendPatterns({
+        //   email: paymentData.email,
+        //   masterClassId: masterClassId,
+        //   language: paymentData.language,
+        // });
+
+        const result = { ...paymentData.dataValues, ...copyPayment };
+
         return { ...paymentData.dataValues, ...copyPayment };
       }
     } catch (e) {
