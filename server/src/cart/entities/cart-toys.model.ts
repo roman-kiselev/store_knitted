@@ -5,8 +5,8 @@ import {
   Model,
   Table,
 } from 'sequelize-typescript';
-import { Toys } from 'src/toys/toys.model';
-import { Cart } from './cart.model';
+import { Cart } from '../cart.model';
+import { Toys } from './../../toys/toys.model';
 
 export interface CartToysAttr {
   cartId: number;

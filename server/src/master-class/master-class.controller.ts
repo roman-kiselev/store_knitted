@@ -10,7 +10,7 @@ import {
   UseInterceptors,
 } from '@nestjs/common';
 import { FileFieldsInterceptor } from '@nestjs/platform-express';
-import { ApiTags } from '@nestjs/swagger';
+import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 import { Role } from 'src/auth/role-auth.decorator';
 import { RoleGuard } from 'src/auth/roles.guard';
 import { CreateMasterClassDto } from './dto/create-master-class.dto';
@@ -61,6 +61,7 @@ export class MasterClassController {
     return this.masterClassService.getOneMasterClassById(id);
   }
 
+  @ApiBearerAuth()
   @Role('admin')
   @UseGuards(RoleGuard)
   @Post('/')

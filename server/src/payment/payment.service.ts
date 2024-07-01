@@ -23,7 +23,7 @@ export class PaymentService {
         const resultPattern = await this.mailService.sendPattern({
           email: dto.email,
           language: dto.language,
-          masterClassId: pattern,
+          masterClassId: [pattern],
         });
 
         if (!resultPattern) {
