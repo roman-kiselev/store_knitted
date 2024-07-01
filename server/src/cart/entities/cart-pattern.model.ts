@@ -6,7 +6,7 @@ import {
   Table,
 } from 'sequelize-typescript';
 import { MasterClass } from 'src/master-class/master-class.model';
-import { Cart } from './cart.model';
+import { Cart } from '../cart.model';
 
 export interface CartPatternAttr {
   cartId: number;

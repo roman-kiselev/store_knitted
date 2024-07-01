@@ -3,6 +3,7 @@ import { InjectModel } from '@nestjs/sequelize';
 import * as nodemailer from 'nodemailer';
 import { FilesService } from 'src/files/files.service';
 import { MasterClass } from 'src/master-class/master-class.model';
+import { SendPatternsDto } from 'src/payment/dto/send-patterns.dto';
 
 @Injectable()
 export class MailService {
@@ -53,7 +54,7 @@ export class MailService {
     console.log('Message sent: %s', info.messageId);
   }
 
-  async sendPattern(dto: SendPatternDto) {
+  async sendPattern(dto: SendPatternsDto) {
     try {
       const { language, email, masterClassId } = dto;
       const transporter = nodemailer.createTransport({

@@ -4,21 +4,17 @@ import { FilesMasterClass } from 'src/files-master-class/files-master-class.mode
 import { MasterClass } from 'src/master-class/master-class.model';
 import { PatternParams } from 'src/pattern-params/pattern-params.model';
 import { TempUser } from 'src/temp-user/temp-user.model';
-import { Toys } from 'src/toys/toys.model';
-import { DatabaseService } from './../database/database.service';
-import { CartPattern } from './cart-pattern.model';
 import { Cart } from './cart.model';
 import { AddPatternToCart } from './dto/add-pattern-to-cart.dto';
 import { CreateCart } from './dto/create-cart.dto';
+import { CartPattern } from './entities/cart-pattern.model';
 import { ICart } from './interfaces/ICart';
 
 @Injectable()
 export class CartService {
   constructor(
     @InjectModel(Cart) private cartRepository: typeof Cart,
-    private databaseService: DatabaseService,
     @InjectModel(MasterClass) private masterClassRepository: typeof MasterClass,
-    @InjectModel(Toys) private toysRepository: typeof Toys,
     @InjectModel(TempUser) private tempUserRepository: typeof TempUser,
     @InjectModel(CartPattern) private cartPatternRepository: typeof CartPattern,
   ) {}

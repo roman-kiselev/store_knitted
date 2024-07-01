@@ -1,5 +1,10 @@
+import { IsNotEmpty, IsOptional } from 'class-validator';
+
 export class CreateCart {
-  readonly idTempUser: number;
-  readonly totalPriceRu?: number;
-  readonly totalPriceEng?: number;
+  @IsNotEmpty()
+  idTempUser: number;
+  @IsOptional()
+  totalPriceRu?: number;
+  @IsOptional()
+  totalPriceEng?: number;
 }
