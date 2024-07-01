@@ -50,7 +50,7 @@ const ModalProducts: React.FC<IModalProductsProps> = ({
                     }}
                 >
                     <img
-                        src={`${process.env.REACT_APP_URL_API}/uploads/pattern/${dataOneItem?.files.mainImg}`}
+                        src={`${process.env.REACT_APP_URL_API}/uploads/${dataOneItem?.files.mainImg}`}
                         alt="img"
                         style={{
                             width: "100%",

@@ -60,7 +60,7 @@ const EditPattern: React.FC<EditPatternProps> = ({ dataPattern }) => {
                         <>
                             <Image
                                 width={200}
-                                src={`${process.env.REACT_APP_URL_API}/uploads/pattern/${dataPattern.files.mainImg}`}
+                                src={`${process.env.REACT_APP_URL_API}/uploads/${dataPattern.files.mainImg}`}
                             />
                             <AddOneImg
                                 initialValue={mainImageState}

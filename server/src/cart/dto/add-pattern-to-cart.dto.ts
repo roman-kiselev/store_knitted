@@ -1,5 +1,10 @@
+import { IsNotEmpty } from 'class-validator';
+
 export class AddPatternToCart {
-  readonly idPattern: number;
-  readonly idTempUser: number;
-  readonly idCart: number;
+  @IsNotEmpty()
+  idPattern: number;
+  @IsNotEmpty()
+  idTempUser: number;
+  @IsNotEmpty()
+  idCart: number;
 }
