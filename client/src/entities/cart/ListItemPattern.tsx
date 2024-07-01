@@ -37,7 +37,7 @@ const ListItemPattern: React.FC<IListItemPattern> = ({
                         onClick={() => showModal(pattern)}
                         shape="square"
                         size={60}
-                        src={`${process.env.REACT_APP_URL_API}/uploads/pattern/${pattern.files.mainImg}`}
+                        src={`${process.env.REACT_APP_URL_API}/uploads/${pattern.files.mainImg}`}
                     />
                 }
                 title={
