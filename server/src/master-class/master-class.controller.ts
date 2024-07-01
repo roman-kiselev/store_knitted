@@ -10,6 +10,7 @@ import {
   UseInterceptors,
 } from '@nestjs/common';
 import { FileFieldsInterceptor } from '@nestjs/platform-express';
+import { ApiTags } from '@nestjs/swagger';
 import { Role } from 'src/auth/role-auth.decorator';
 import { RoleGuard } from 'src/auth/roles.guard';
 import { CreateMasterClassDto } from './dto/create-master-class.dto';
@@ -18,6 +19,7 @@ import { FormMasterClass } from './dto/form-master-class.dto';
 import { IFiles } from './interfaces/IFiles';
 import { MasterClassService } from './master-class.service';
 
+@ApiTags('MasterClass')
 @Controller('master-class')
 export class MasterClassController {
   constructor(private masterClassService: MasterClassService) {}

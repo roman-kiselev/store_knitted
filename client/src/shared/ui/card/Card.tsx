@@ -77,7 +77,7 @@ const Card: React.FC<CardProps> = ({ col, colLg, params, handleShowModal }) => {
                         className={styles.containerImg}
                         // src="https://images.boosty.to/image/4487b074-b538-47ca-bf5d-2742834a69d0?change_time=1695975289"
                         // alt="img"
-                        src={`${process.env.REACT_APP_URL_API}/uploads/pattern/${params.files.mainImg}`}
+                        src={`${process.env.REACT_APP_URL_API}/uploads/${params.files.mainImg}`}
                         alt="img"
                     />
                 </div>

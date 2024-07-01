@@ -1,9 +1,11 @@
 import { Body, Controller, Get, Param, Post, UseGuards } from '@nestjs/common';
+import { ApiTags } from '@nestjs/swagger';
 import { Role } from 'src/auth/role-auth.decorator';
 import { RoleGuard } from 'src/auth/roles.guard';
 import { CreateParameterToysDto } from './dto/create-parameter-toys.dto';
 import { ParametrToysService } from './parametr-toys.service';
 
+@ApiTags('ParametrToys')
 @Controller('parametr-toys')
 export class ParametrToysController {
   constructor(private parametrToysService: ParametrToysService) {}
